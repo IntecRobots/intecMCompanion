@@ -1,6 +1,5 @@
 import React from "react";
 import { useStorageState } from "../hooks/useStorageState";
-import { Alert } from "react-native";
 import { router } from "expo-router";
 
 interface LoginResponse {
@@ -63,6 +62,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
           }
         },
         signOut: () => {
+          router.replace("/");
           setSession(null);
         },
         session,

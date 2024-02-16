@@ -3,10 +3,14 @@ import { StyleSheet } from "react-native";
 import EditScreenInfo from "@/components/EditScreenInfo";
 import { Text, View } from "@/components/Themed";
 import LoginForm from "@/components/auth/LoginForm";
+import { Link } from "expo-router";
 
 const Home = () => {
   return (
     <View style={styles.container}>
+      <Link style={styles.title} href={"/(tabs)"}>
+        Ir a tabs
+      </Link>
       <LoginForm />
     </View>
   );
@@ -23,6 +27,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "bold",
+    color: "white"
   },
   separator: {
     marginVertical: 30,

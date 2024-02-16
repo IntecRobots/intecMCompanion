@@ -4,8 +4,8 @@ import { Link, Tabs } from "expo-router";
 import { Pressable } from "react-native";
 
 import Colors from "@/constants/Colors";
-import { useColorScheme } from "@/components/useColorScheme";
-import { useClientOnlyValue } from "@/components/useClientOnlyValue";
+import { useColorScheme } from "@/hooks/useColorScheme";
+import { useClientOnlyValue } from "@/hooks/useClientOnlyValue";
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: { name: React.ComponentProps<typeof FontAwesome>["name"]; color: string }) {
@@ -27,8 +27,8 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Tab One",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "Visitas",
+          tabBarIcon: ({ color }) => <TabBarIcon name="users" color={color} />,
           headerRight: () => (
             <Link href="/modal" asChild>
               <Pressable>
@@ -48,7 +48,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="two"
         options={{
-          title: "Tab Two",
+          title: "Tab dos",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
