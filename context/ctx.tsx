@@ -19,7 +19,6 @@ const AuthContext = React.createContext<{
   isLoading: false,
 });
 
-// This hook can be used to access the user info.
 export function useSession() {
   const value = React.useContext(AuthContext);
   if (process.env.NODE_ENV !== "production") {
@@ -39,7 +38,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
       value={{
         signIn: async (username: string, password: string) => {
           try {
-            const response = await fetch("https://t2o.intecrobots.com/api/auth/login", {
+            const response = await fetch(`${process.env.BACKEND_URL}/auth/login`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

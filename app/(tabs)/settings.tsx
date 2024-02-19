@@ -6,7 +6,7 @@ const Settings = () => {
 
   return (
     <View>
-      <Text>Screen tres</Text>
+      <Text>Settings screen</Text>
       <Button title="Cerrar sesión" onPress={() => signOut()} />
     </View>
   );

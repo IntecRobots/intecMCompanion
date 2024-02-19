@@ -1,16 +1,24 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text } from "react-native";
 
-import EditScreenInfo from "@/components/EditScreenInfo";
-import { Text, View } from "@/components/Themed";
+import { View } from "@/components/Themed";
 import LoginForm from "@/components/auth/LoginForm";
-import { Link } from "expo-router";
+import { Link, Redirect } from "expo-router";
+import { useSession } from "@/context/ctx";
 
 const Home = () => {
+  const { session, isLoading } = useSession();
+
+  if (isLoading) {
+    return <Text>Loading...</Text>;
+  }
+
+  if (session) {
+    return <Redirect href={"/(tabs)"} />;
+  }
+
   return (
     <View style={styles.container}>
-      <Link style={styles.title} href={"/(tabs)"}>
-        Ir a tabs
-      </Link>
+      <Text style={styles.title}>{session}</Text>
       <LoginForm />
     </View>
   );
@@ -27,7 +35,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "white"
+    color: "white",
   },
   separator: {
     marginVertical: 30,

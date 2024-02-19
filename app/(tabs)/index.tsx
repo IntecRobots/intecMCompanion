@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 
-import EditScreenInfo from "@/components/EditScreenInfo";
 import { Text, View } from "@/components/Themed";
 import { useSession } from "@/context/ctx";
 import { Redirect } from "expo-router";
@@ -9,8 +8,6 @@ export default function TabOneScreen() {
   const { session } = useSession();
 
   if (!session) {
-    // On web, static rendering will stop here as the user is not authenticated
-    // in the headless Node process that the pages are rendered in.
     return <Redirect href="/" />;
   }
 
