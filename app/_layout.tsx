@@ -37,7 +37,7 @@ Notifications.setNotificationHandler({
 // Can use this function below or use Expo's Push Notification Tool from: https://expo.dev/notifications
 async function sendPushNotification(expoPushToken: any) {
   const message = {
-    to: expoPushToken,
+    to: expoPushToken.data,
     sound: 'default',
     title: 'Original Title',
     body: 'And here is the body!',
@@ -81,7 +81,7 @@ async function registerForPushNotificationsAsync() {
     token = await Notifications.getExpoPushTokenAsync({
        projectId: Constants?.expoConfig?.extra?.eas.projectId,
     });
-    console.log(token);
+    alert(token);
   } else {
     alert('Must use physical device for Push Notifications');
   }

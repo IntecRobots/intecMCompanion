@@ -1,6 +1,5 @@
 import { ScrollView, StyleSheet } from "react-native";
 
-import { Text, View } from "@/components/Themed";
 import { useSession } from "@/context/ctx";
 import { Redirect } from "expo-router";
 import Notification from "@/components/Notification";
