@@ -1,16 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
-import { Platform, StyleSheet } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { Platform, StyleSheet } from "react-native";
 
-import { Text, View } from '@/components/Themed';
+import { Text, View } from "@/components/Themed";
+import { useSession } from "@/context/ctx";
+
 
 export default function ModalScreen() {
+  const { session } = useSession();
+  
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Modal</Text>
+      <Text style={styles.title}>Sesión iniciada</Text>
+      <Text style={styles.title}>{process.env.EXPO_PUBLIC_API_URL}</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-
-      {/* Use a light status bar on iOS to account for the black space above the modal */}
-      <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
+      <Text style={styles.body}>{session}</Text>
     </View>
   );
 }
@@ -18,16 +21,20 @@ export default function ModalScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
+  },
+  body: {
+    fontSize: 10,
+    fontWeight: "400",
   },
   separator: {
     marginVertical: 30,
     height: 1,
-    width: '80%',
+    width: "80%",
   },
 });

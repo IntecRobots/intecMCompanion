@@ -1,9 +1,12 @@
+import { useSession } from '@/context/ctx';
 import { useState, useEffect } from 'react';
 
 const useApi = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<any>(null);
+
+  const { session } = useSession();
 
   useEffect(() => {
     const fetchData = async () => {
