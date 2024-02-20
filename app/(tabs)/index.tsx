@@ -1,8 +1,9 @@
-import { StyleSheet } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 
 import { Text, View } from "@/components/Themed";
 import { useSession } from "@/context/ctx";
 import { Redirect } from "expo-router";
+import Notification from "@/components/Notification";
 
 export default function TabOneScreen() {
   const { session } = useSession();
@@ -12,9 +13,23 @@ export default function TabOneScreen() {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Notification page</Text>
-    </View>
+    <ScrollView>
+      <Notification />
+      <Notification />
+      <Notification />
+      <Notification />
+      <Notification />
+      <Notification />
+      <Notification />
+      <Notification />
+      <Notification />
+      <Notification />
+      <Notification />
+      <Notification />
+      <Notification />
+      <Notification />
+      <Notification />
+    </ScrollView>
   );
 }
 
