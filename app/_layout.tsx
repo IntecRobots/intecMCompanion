@@ -18,16 +18,13 @@ import * as Device from "expo-device";
 import Constants from "expo-constants";
 
 export {
-  // Catch any errors thrown by the Layout component.
   ErrorBoundary,
 } from "expo-router";
 
 export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
   initialRouteName: "home",
 };
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 Notifications.setNotificationHandler({
@@ -38,7 +35,6 @@ Notifications.setNotificationHandler({
   }),
 });
 
-// Can use this function below or use Expo's Push Notification Tool from: https://expo.dev/notifications
 async function sendPushNotification(expoPushToken: any) {
   const message = {
     to: expoPushToken.data,
@@ -143,7 +139,6 @@ export default function RootLayout() {
     };
   }, []);
 
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
     if (error) throw error;
   }, [error]);
