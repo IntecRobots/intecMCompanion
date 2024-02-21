@@ -11,7 +11,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { SessionProvider } from "@/context/ctx";
-import { Button, Platform } from "react-native";
+import { Button, Platform, Pressable, Text } from "react-native";
 
 import * as Notifications from "expo-notifications";
 import * as Device from "expo-device";
@@ -103,11 +103,10 @@ async function registerForPushNotificationsAsync() {
       projectId: Constants?.expoConfig?.extra?.eas.projectId,
     });
     alert(JSON.stringify(token));
+    console.log(JSON.stringify(token));
   } else {
     alert("Must use physical device for Push Notifications");
   }
-
-  sendPushNotification(token);
   return token;
 }
 
@@ -159,10 +158,16 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return (
+    <RootLayoutNav>
+      <Pressable onPress={() => sendPushNotification(expoPushToken)}>
+        <Text>dsada</Text>
+      </Pressable>
+    </RootLayoutNav>
+  );
 }
 
-function RootLayoutNav() {
+function RootLayoutNav(props: React.PropsWithChildren) {
   const colorScheme = useColorScheme();
 
   return (
@@ -172,6 +177,7 @@ function RootLayoutNav() {
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="modal" options={{ presentation: "modal" }} />
         </Stack>
+        {props.children}
       </ThemeProvider>
     </SessionProvider>
   );
