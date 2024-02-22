@@ -11,7 +11,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { SessionProvider } from "@/context/ctx";
-import { Button, Platform, Pressable, Text } from "react-native";
+import { Platform, Pressable, Text } from "react-native";
 
 import * as Notifications from "expo-notifications";
 import * as Device from "expo-device";
@@ -22,7 +22,7 @@ export {
 } from "expo-router";
 
 export const unstable_settings = {
-  initialRouteName: "home",
+  initialRouteName: "index",
 };
 
 SplashScreen.preventAutoHideAsync();
@@ -168,7 +168,8 @@ function RootLayoutNav(props: React.PropsWithChildren) {
   return (
     <SessionProvider>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Stack initialRouteName="home">
+        <Stack initialRouteName="index" >
+          <Stack.Screen name="index" options={{ headerShown: false }} />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="modal" options={{ presentation: "modal" }} />
         </Stack>
