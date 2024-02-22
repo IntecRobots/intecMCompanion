@@ -1,4 +1,4 @@
-import { useSession } from '@/context/ctx';
+import { useSession } from '@/src/context/ctx';
 import { useState, useEffect } from 'react';
 
 const useApi = () => {

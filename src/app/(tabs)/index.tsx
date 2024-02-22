@@ -1,8 +1,8 @@
 import { ScrollView, StyleSheet } from "react-native";
 
-import { useSession } from "@/context/ctx";
+import { useSession } from "@/src/context/ctx";
 import { Redirect } from "expo-router";
-import Notification from "@/components/Notification";
+import Notification from "@/src/components/Notification";
 
 export default function TabOneScreen() {
   const { session } = useSession();

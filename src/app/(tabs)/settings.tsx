@@ -1,4 +1,4 @@
-import { useSession } from "@/context/ctx";
+import { useSession } from "@/src/context/ctx";
 import { Button, Text, View } from "react-native";
 
 const Settings = () => {

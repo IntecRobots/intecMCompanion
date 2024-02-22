@@ -1,4 +1,4 @@
-import { useSession } from "@/context/ctx";
+import { useSession } from "@/src/context/ctx";
 import React, { useState } from "react";
 import { View, TextInput, TouchableOpacity, Text, StyleSheet, Image } from "react-native";
 
@@ -11,10 +11,7 @@ const LoginForm = () => {
   return (
     <View style={styles.container}>
       <View style={styles.curveShape}>
-        <Image
-          source={require("../../assets/images/favicon.png")}
-          style={styles.logo}
-        />
+        <Image source={require("../../../assets/images/intecrobots_dark.png")} style={styles.logo} />
       </View>
       <View style={styles.loginCard}>
         <Text style={styles.loginTitle}>Iniciar sesión</Text>
@@ -34,18 +31,19 @@ const LoginForm = () => {
           ¿No estás registrado? <Text style={styles.signupLink}>Contacta con nosotros</Text>
         </Text>
       </View>
+      <Text style={styles.footerText}>© 2024 Intec Robots.</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   logo: {
-    width: 100,
-    height: 100,
+    width: 150,
+    height: 150,
     resizeMode: "contain",
     alignSelf: "center",
     position: "absolute",
-    top: 100,
+    top: 70,
   },
   curveShape: {
     position: "absolute",
@@ -63,9 +61,9 @@ const styles = StyleSheet.create({
   },
   loginCard: {
     width: "85%",
+    backgroundColor: "#242424",
     maxWidth: 400,
     padding: 20,
-    backgroundColor: "#ffffff",
     borderRadius: 10,
     elevation: 10, // Sombras para Android
     shadowColor: "#000", // Sombras para iOS
@@ -76,7 +74,7 @@ const styles = StyleSheet.create({
   loginTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#333",
+    color: "#ffffff",
     marginBottom: 20,
     textAlign: "center",
   },
@@ -103,11 +101,16 @@ const styles = StyleSheet.create({
   },
   signupText: {
     marginTop: 20,
-    color: "#333",
+    color: "#ffffff",
     textAlign: "center",
   },
   signupLink: {
     color: "#3F51B5",
+    fontWeight: "bold",
+  },
+  footerText: {
+    marginTop: 15,
+    color: "#7d7d7d",
     fontWeight: "bold",
   },
 });

@@ -1,24 +1,29 @@
-import { StyleSheet, View, Image, Button } from "react-native";
+import { StyleSheet, View, Image, Button, Pressable } from "react-native";
 import { Text } from "./Themed";
 
-const Notification = () => {
+interface NotificationProps {
+  message: string;
+  isUnread: boolean;
+  showButtons: boolean;
+}
+
+const Notification: React.FC<NotificationProps> = ({ message, isUnread, showButtons }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.unreadIndicator}></View>
-      <Image source={require("../assets/images/favicon.png")} style={styles.image} />
+      {isUnread && <View style={styles.unreadIndicator}></View>}
+      <Image source={require("../../assets/images/favicon.png")} style={styles.image} />
       <View style={styles.textContainer}>
-        <Text>
-          <Text style={styles.boldText}>Alguien </Text>
-          ha llegado a recepción.
-          <Text style={styles.boldText}> Acepta </Text>
-          o
-          <Text style={styles.boldText}> rechaza </Text>
-          esta notificación para hacer cosas.
-        </Text>
-        <View style={styles.buttons}>
-          <Button title="Aceptar"></Button>
-          <Button title="Cancelar"></Button>
-        </View>
+        <Text>{message}</Text>
+        {showButtons && (
+          <View style={styles.buttons}>
+            <Pressable>
+              <Text>Accept</Text>
+            </Pressable>
+            <Pressable>
+              <Text>Reject</Text>
+            </Pressable>
+          </View>
+        )}
       </View>
     </View>
   );

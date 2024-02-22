@@ -1,8 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import { Platform, StyleSheet } from "react-native";
 
-import { Text, View } from "@/components/Themed";
-import { useSession } from "@/context/ctx";
+import { Text, View } from "@/src/components/Themed";
+import { useSession } from "@/src/context/ctx";
 
 
 export default function ModalScreen() {
