@@ -1,5 +1,6 @@
-import { StyleSheet, View, Image, Button, Pressable } from "react-native";
+import { StyleSheet, View, Image } from "react-native";
 import { Text } from "./Themed";
+import NotificationButtons from "./NotificationButtons";
 
 interface NotificationProps {
   message: string;
@@ -9,19 +10,14 @@ interface NotificationProps {
 
 const Notification: React.FC<NotificationProps> = ({ message, isUnread, showButtons }) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, isUnread ? styles.unreadContainer : null]}>
       {isUnread && <View style={styles.unreadIndicator}></View>}
       <Image source={require("../../assets/images/favicon.png")} style={styles.image} />
       <View style={styles.textContainer}>
         <Text>{message}</Text>
         {showButtons && (
           <View style={styles.buttons}>
-            <Pressable>
-              <Text>Accept</Text>
-            </Pressable>
-            <Pressable>
-              <Text>Reject</Text>
-            </Pressable>
+            <NotificationButtons />
           </View>
         )}
       </View>
@@ -36,7 +32,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     borderRadius: 10,
-    marginVertical: 5,
+    marginVertical: 7,
+    marginHorizontal:10
   },
   image: {
     width: 50,
@@ -47,6 +44,9 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 1,
+  },
+  unreadContainer: {
+    backgroundColor: "#2a4d69", // Un tono azulado para notificaciones no leídas
   },
   title: {
     fontSize: 16,
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     width: 10,
     height: 10,
     borderRadius: 5,
-    backgroundColor: "#a30707",
+    backgroundColor: "#1e76e3", // Color azul para el indicador
     position: "absolute",
     left: 7,
     top: "50%",
