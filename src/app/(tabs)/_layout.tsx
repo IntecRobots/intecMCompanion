@@ -13,23 +13,23 @@ function TabBarIcon(props: { name: React.ComponentProps<typeof FontAwesome>["nam
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-
+  // Colors[colorScheme ?? "light"].tint
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarActiveTintColor: "#5C6BC0",
         headerShown: useClientOnlyValue(false, true),
       }}
     >
       <Tabs.Screen
-        name="home"
+        name="index"
         options={{
-          title: "Inicio",
+          title: "Home",
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
         }}
       />
       <Tabs.Screen
-        name="index"
+        name="notifications"
         options={{
           title: "Notificaciones",
           tabBarIcon: ({ color }) => <TabBarIcon name="bell" color={color} />,

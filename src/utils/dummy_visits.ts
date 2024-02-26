@@ -3,7 +3,7 @@ export const DUMMY_VISITS = [
       title: "Visita al Museo de Arte",
       description: "Una visita guiada por las principales obras del museo.",
       visitors: ["Alice", "Bob", "Charlie"],
-      date: "2024-02-20",
+      date: "2024-03-20",
       imageUrl: "../../assets/images/intecrobots.png"
     },
     {
@@ -31,7 +31,7 @@ export const DUMMY_VISITS = [
       title: "Visita al Jardín Botánico",
       description: "Recorrido por la diversidad de plantas y flores del jardín botánico.",
       visitors: ["Mia", "Nolan", "Olivia"],
-      date: "2024-02-24",
+      date: "2024-03-24",
       imageUrl: "../../assets/images/intecrobots.png"
     },
     {
@@ -45,14 +45,14 @@ export const DUMMY_VISITS = [
       title: "Concierto al Aire Libre",
       description: "Disfrute de una noche de música en el parque.",
       visitors: ["Steve", "Tina", "Uma"],
-      date: "2024-02-26",
+      date: "2024-03-26",
       imageUrl: "../../assets/images/intecrobots.png"
     },
     {
       title: "Feria Gastronómica Local",
       description: "Degustación de platos típicos de la región.",
       visitors: ["Victor", "Wendy", "Xavier"],
-      date: "2024-02-27",
+      date: "2024-03-27",
       imageUrl: "../../assets/images/intecrobots.png"
     },
     {

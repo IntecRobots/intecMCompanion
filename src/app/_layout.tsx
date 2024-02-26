@@ -95,6 +95,7 @@ async function registerForPushNotificationsAsync() {
   } else {
     alert("Must use physical device for Push Notifications");
   }
+  // enviar token al backend cuando se recupere
   return token;
 }
 
