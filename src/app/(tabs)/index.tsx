@@ -1,58 +1,87 @@
-import React from 'react';
-import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
+import { Dimensions } from "react-native";
 
-const HomeScreen = () => {
+const screenWidth = Dimensions.get("window").width;
+
+const DashboardScreen = () => {
+  const chartData = {
+    labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago"],
+    datasets: [
+      {
+        data: [20, 45, 28, 80, 99, 43, 50, 70],
+        color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, // optional
+        strokeWidth: 2, // optional
+      },
+    ],
+  };
+
+  const summaryData = [
+    { title: "Notificaciones", value: 14 },
+    { title: "Visitas", value: 5 },
+    { title: "Eventos", value: 10 },
+    { title: "To-dos", value: 4 },
+  ];
   return (
-    <View style={styles.container}>
-      <Image
-        source={require("../../../assets/images/placeholderbot2.jpeg")}
-        style={styles.backgroundImage}
-      />
-      <View style={styles.overlay}>
-        <Text style={styles.title}>Intec Mobile Companion</Text>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Explorar</Text>
-        </TouchableOpacity>
+    <ScrollView style={styles.container}>
+      <View style={styles.summaryContainer}>
+        {summaryData.map((item, index) => (
+          <View key={index} style={styles.summaryBoxWrapper}>
+            <View style={styles.summaryBox}>
+              <Text style={styles.summaryTitle}>{item.title}</Text>
+              <Text style={styles.summaryValue}>{item.value}</Text>
+            </View>
+          </View>
+        ))}
       </View>
-    </View>
+      <Image style={styles.fullWidthImage} source={require("../../../assets/images/placeholderbot2.jpeg")} />
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  fullWidthImage: {
+    width: screenWidth,
+  },
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
-  backgroundImage: {
-    position: 'absolute',
-    width: '95%',
-    height: '95%',
-    resizeMode: 'contain',
-    alignSelf: 'center',
-  },
-  overlay: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    width: '100%',
-    height: '100%',
-  },
-  title: {
+  headerText: {
     fontSize: 24,
-    color: 'white',
-    fontWeight: 'bold',
-    marginBottom: 20,
+    fontWeight: "bold",
+    color: "white",
   },
-  button: {
-    backgroundColor: '#007bff',
-    padding: 15,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: 'white',
+  summaryTitle: {
     fontSize: 16,
+    marginBottom: 5,
+    color: "white",
+  },
+  summaryValue: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "white",
+  },
+  summaryContainer: {
+    flexDirection: "row", // Se mantiene horizontal
+    flexWrap: "wrap", // Permite el ajuste automático de los elementos
+    justifyContent: "space-between", // Distribuye el espacio restante
+    padding: 10,
+  },
+  summaryBoxWrapper: {
+    width: "50%", // Cada envoltorio ocupa el 50% del contenedor
+    padding: 10, // Espaciado entre las tarjetas
+  },
+  summaryBox: {
+    backgroundColor: "#242424",
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    padding: 15,
+    alignItems: "center",
   },
 });
 
-export default HomeScreen;
+export default DashboardScreen;

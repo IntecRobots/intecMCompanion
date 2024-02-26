@@ -12,7 +12,7 @@ const Notification: React.FC<NotificationProps> = ({ message, isUnread, showButt
   return (
     <View style={[styles.container, isUnread ? styles.unreadContainer : null]}>
       {isUnread && <View style={styles.unreadIndicator}></View>}
-      <Image source={require("../../assets/images/favicon.png")} style={styles.image} />
+      <Image source={require("../../assets/images/placeholder.jpg")} style={styles.image} />
       <View style={styles.textContainer}>
         <Text>{message}</Text>
         {showButtons && (
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   unreadContainer: {
-    backgroundColor: "#2a4d69", // Un tono azulado para notificaciones no leídas
+    backgroundColor: "#2A4D69", // Un tono azulado para notificaciones no leídas
   },
   title: {
     fontSize: 16,
