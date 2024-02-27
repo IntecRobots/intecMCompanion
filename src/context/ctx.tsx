@@ -49,7 +49,8 @@ export function SessionProvider(props: React.PropsWithChildren) {
               }),
             });
 
-            const json: LoginResponse = await response.json();
+            const json: any = await response.json();
+            console.log(json);
             if (response.status === 200) {
               setSession(json.token);
               router.replace("/(tabs)");

@@ -10,6 +10,9 @@
     "preview": {
       "android": {
         "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://t2o.intecrobots.com/api"
       }
     },
     "preview2": {
@@ -26,8 +29,6 @@
     "production": {}
   },
   "submit": {
-    "production": {
-      "autoIncrement": true
-    }
+    "production": {}
   }
 }
