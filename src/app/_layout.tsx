@@ -4,6 +4,7 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect, useRef, useState } from "react";
+import * as SecureStore from 'expo-secure-store';
 
 import { useColorScheme } from "@/src/hooks/useColorScheme";
 import { SessionProvider } from "@/src/context/ctx";
@@ -24,10 +25,21 @@ SplashScreen.preventAutoHideAsync();
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
-    shouldPlaySound: false,
+    shouldPlaySound: true,
     shouldSetBadge: false,
   }),
 });
+
+const storeNotification = async (notification: any) => {
+  try {
+    const storedNotifications = await SecureStore.getItemAsync('notifications');
+    const notifications = storedNotifications ? JSON.parse(storedNotifications) : [];
+    notifications.push(notification);
+    await SecureStore.setItemAsync('notifications', JSON.stringify(notifications));
+  } catch (error) {
+    console.error('Error al guardar la notificación', error);
+  }
+};
 
 async function sendPushNotification(expoPushToken: any) {
   const message = {
@@ -114,6 +126,7 @@ export default function RootLayout() {
 
     notificationListener.current = Notifications.addNotificationReceivedListener((notification) => {
       setNotification(notification);
+      storeNotification(notification);
     });
 
     responseListener.current = Notifications.addNotificationResponseReceivedListener((response) => {

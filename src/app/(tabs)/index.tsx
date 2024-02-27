@@ -5,16 +5,6 @@ import { Dimensions } from "react-native";
 const screenWidth = Dimensions.get("window").width;
 
 const DashboardScreen = () => {
-  const chartData = {
-    labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago"],
-    datasets: [
-      {
-        data: [20, 45, 28, 80, 99, 43, 50, 70],
-        color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, // optional
-        strokeWidth: 2, // optional
-      },
-    ],
-  };
 
   const summaryData = [
     { title: "Notificaciones", value: 14 },
