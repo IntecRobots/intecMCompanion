@@ -1,12 +1,22 @@
 import { StatusBar } from "expo-status-bar";
 import { Platform, StyleSheet } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { Text, View } from "@/src/components/Themed";
 import { useSession } from "@/src/context/ctx";
+import { useEffect, useState } from "react";
 
 
 export default function ModalScreen() {
   const { session } = useSession();
+  const [token, setToken] = useState<any>("");
+
+  useEffect(() => {
+    const loadToken = async () => {
+      const token = await AsyncStorage.getItem("pushtoken");
+      setToken(token)
+    };
+  }, []);
   
   return (
     <View style={styles.container}>
@@ -14,6 +24,7 @@ export default function ModalScreen() {
       <Text style={styles.title}>{process.env.EXPO_PUBLIC_API_URL}</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <Text style={styles.body}>{session}</Text>
+      <Text style={styles.body}>{token}</Text>
     </View>
   );
 }

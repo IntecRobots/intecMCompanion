@@ -10,6 +10,11 @@ interface NotificationProps {
 
 const Notification: React.FC<NotificationProps> = ({ message, isUnread, showButtons }) => {
   return (
+    <View>
+      <Text></Text>
+    </View>
+  );
+  /* return (
     <View style={[styles.container, isUnread ? styles.unreadContainer : null]}>
       {isUnread && <View style={styles.unreadIndicator}></View>}
       <Image source={require("../../assets/images/placeholder.jpg")} style={styles.image} />
@@ -22,7 +27,7 @@ const Notification: React.FC<NotificationProps> = ({ message, isUnread, showButt
         )}
       </View>
     </View>
-  );
+  );*/
 };
 
 const styles = StyleSheet.create({
@@ -33,7 +38,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     marginVertical: 7,
-    marginHorizontal:10
+    marginHorizontal: 10,
   },
   image: {
     width: 50,

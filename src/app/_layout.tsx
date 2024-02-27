@@ -4,7 +4,8 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect, useRef, useState } from "react";
-import * as SecureStore from 'expo-secure-store';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 import { useColorScheme } from "@/src/hooks/useColorScheme";
 import { SessionProvider } from "@/src/context/ctx";
@@ -32,14 +33,20 @@ Notifications.setNotificationHandler({
 
 const storeNotification = async (notification: any) => {
   try {
-    const storedNotifications = await SecureStore.getItemAsync('notifications');
-    const notifications = storedNotifications ? JSON.parse(storedNotifications) : [];
-    notifications.push(notification);
-    await SecureStore.setItemAsync('notifications', JSON.stringify(notifications));
+    const savedNotifications = await AsyncStorage.getItem('@notifications');
+    const existingNotifications = savedNotifications ? JSON.parse(savedNotifications) : [];
+    
+    const newNotification = { ...notification, isRead: false };
+    console.log(newNotification);
+    const updatedNotifications = [...existingNotifications, newNotification];
+
+    await AsyncStorage.setItem('@notifications', JSON.stringify(updatedNotifications));
   } catch (error) {
-    console.error('Error al guardar la notificación', error);
+    console.error('Error saving notification:', error);
   }
 };
+
+
 
 async function sendPushNotification(expoPushToken: any) {
   const message = {
@@ -107,7 +114,7 @@ async function registerForPushNotificationsAsync() {
   } else {
     alert("Must use physical device for Push Notifications");
   }
-  // enviar token al backend cuando se recupere
+  await AsyncStorage.setItem('pushtoken', JSON.stringify(token));
   return token;
 }
 
