@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { ScrollView, View, Text, Pressable, StyleSheet, Image, Button } from "react-native";
+import { ScrollView, View, Text, Pressable, StyleSheet, Image, Button, ActivityIndicator } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { DUMMY_NOTIFICATIONS } from "@/src/utils/dummy_notifications";
 import Notification from "@/src/components/Notification";
 import { useFocusEffect } from "expo-router";
 
@@ -29,18 +28,18 @@ const Notifications = () => {
     try {
       await AsyncStorage.removeItem("@notifications");
       console.log("Notifications cleared");
-      setNotifications([]); // Actualiza el estado para reflejar la eliminación
+      setNotifications([]);
     } catch (error) {
       console.error("Error clearing notifications:", error);
     }
   };
 
-  console.log(notifications);
-
-  const dummy_notifications = DUMMY_NOTIFICATIONS.filter((notification) => (activeTab === "all" ? true : notification.isUnread));
-
   if (isLoading) {
-    return <Text>Loading...</Text>;
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size={120} color="#5C6BC0" />
+      </View>
+    );
   }
 
   return (
@@ -54,21 +53,23 @@ const Notifications = () => {
         </Pressable>
       </View>
       <Button onPress={() => clearNotifications()} title="clear" />
-      <Text style={{ color: "white" }}>{JSON.stringify(notifications)}</Text>
-      {/* <ScrollView style={styles.notificationsContainer}>
-        {dummy_notifications.length ? (
-          dummy_notifications.map((notification) => (
-            <Notification
-              key={notification.id}
-              message={notification.message}
-              isUnread={notification.isUnread}
-              showButtons={notification.showButtons}
-            />
-          ))
+      <ScrollView style={styles.notificationsContainer}>
+        {notifications.length ? (
+          notifications
+            .reverse()
+            .map((notification: any, k: number) => (
+              <Notification
+                key={k}
+                body={notification?.request?.content?.body}
+                title={notification?.request?.content?.title}
+                isRead={notification.isRead}
+                showButtons={notification?.request?.content?.data?.showButtons}
+              />
+            ))
         ) : (
           <Text style={styles.noNotificationsText}>You have no notifications</Text>
         )}
-        </ScrollView> */}
+      </ScrollView>
     </View>
   );
 };

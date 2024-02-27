@@ -3,23 +3,20 @@ import { Text } from "./Themed";
 import NotificationButtons from "./NotificationButtons";
 
 interface NotificationProps {
-  message: string;
-  isUnread: boolean;
+  title: string;
+  body: string;
+  isRead: boolean;
   showButtons: boolean;
 }
 
-const Notification: React.FC<NotificationProps> = ({ message, isUnread, showButtons }) => {
+const Notification: React.FC<NotificationProps> = ({ title, body, isRead, showButtons }) => {
   return (
-    <View>
-      <Text></Text>
-    </View>
-  );
-  /* return (
-    <View style={[styles.container, isUnread ? styles.unreadContainer : null]}>
-      {isUnread && <View style={styles.unreadIndicator}></View>}
+    <View style={[styles.container, isRead ? null : styles.unreadContainer]}>
+      {!isRead && <View style={styles.unreadIndicator}></View>}
       <Image source={require("../../assets/images/placeholder.jpg")} style={styles.image} />
       <View style={styles.textContainer}>
-        <Text>{message}</Text>
+        <Text style={{ fontWeight: "bold" }}>{title}</Text>
+        <Text>{body}</Text>
         {showButtons && (
           <View style={styles.buttons}>
             <NotificationButtons />
@@ -27,7 +24,7 @@ const Notification: React.FC<NotificationProps> = ({ message, isUnread, showButt
         )}
       </View>
     </View>
-  );*/
+  );
 };
 
 const styles = StyleSheet.create({
@@ -51,7 +48,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   unreadContainer: {
-    backgroundColor: "#2A4D69", // Un tono azulado para notificaciones no leídas
+    backgroundColor: "#2A4D69",
   },
   title: {
     fontSize: 16,
@@ -66,7 +63,7 @@ const styles = StyleSheet.create({
     width: 10,
     height: 10,
     borderRadius: 5,
-    backgroundColor: "#1e76e3", // Color azul para el indicador
+    backgroundColor: "#1e76e3",
     position: "absolute",
     left: 7,
     top: "50%",

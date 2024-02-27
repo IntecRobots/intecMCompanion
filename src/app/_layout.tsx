@@ -124,7 +124,6 @@ export default function RootLayout() {
     ...FontAwesome.font,
   });
   const [expoPushToken, setExpoPushToken] = useState<any>("");
-  const [notification, setNotification] = useState<any>(false);
   const notificationListener = useRef<any>();
   const responseListener = useRef<any>();
 
@@ -132,7 +131,6 @@ export default function RootLayout() {
     registerForPushNotificationsAsync().then((token) => setExpoPushToken(token));
 
     notificationListener.current = Notifications.addNotificationReceivedListener((notification) => {
-      setNotification(notification);
       storeNotification(notification);
     });
 
