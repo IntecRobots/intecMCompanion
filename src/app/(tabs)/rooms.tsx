@@ -1,16 +1,23 @@
 import Room from "@/src/components/Room";
+import { Text } from "@/src/components/Themed";
+import useRooms from "@/src/hooks/useRooms";
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 
 const Rooms = () => {
-  const dummyRooms = ["Sala1", "Sala2", "Sala3", "Sala4"];
+  const { rooms, isLoading, error } = useRooms(`${process.env.EXPO_PUBLIC_API_URL}/salas`);
+
+  if (isLoading) return <Text>Cargando...</Text>;
+  if (error) return <Text>Error al cargar las salas</Text>;
+
+  console.log(rooms);
 
   return (
-    <View style={styles.container}>
-      {dummyRooms.map((room, index) => (
-        <Room key={index} sala={room} availability={index % 2 == 0 ? true : false} />
+    <ScrollView style={styles.container}>
+      {rooms?.records?.map((room: any, index: number) => (
+        <Room key={index} sala={room.sala} estado={room.estado} id={room.id} puntomapa={room.puntomapa} />
       ))}
-    </View>
+    </ScrollView>
   );
 };
 

@@ -1,18 +1,26 @@
 import React, { useState } from "react";
-import { Text, View, TouchableOpacity, StyleSheet, Switch } from "react-native";
+import { Text, View, TouchableOpacity, StyleSheet, Switch, ActivityIndicator } from "react-native";
+import { useRoomUpdate } from "../hooks/useRoomUpdate";
 
 type RoomProps = {
   id?: string;
   sala: string;
   puntomapa?: string;
-  availability: boolean;
+  estado: boolean;
 };
 
-const Room: React.FC<RoomProps> = ({ id, sala, puntomapa, availability }) => {
-  const [isEnabled, setIsEnabled] = useState<boolean>(availability);
+const Room: React.FC<RoomProps> = ({ id, sala, puntomapa, estado }) => {
+  const [isEnabled, setIsEnabled] = useState<boolean>(estado);
+  const { isUpdating, updateRoomState } = useRoomUpdate();
 
-  const toggleRoomState = () => {
-    setIsEnabled(!isEnabled);
+  console.log(estado);
+
+  const toggleRoomState = async () => {
+    if (isUpdating || !id) return;
+
+    const newIsEnabled = !isEnabled;
+    setIsEnabled(newIsEnabled);
+    await updateRoomState(id, newIsEnabled);
   };
 
   const roomStyle = isEnabled ? styles.roomAvailable : styles.roomOccupied;
@@ -21,12 +29,16 @@ const Room: React.FC<RoomProps> = ({ id, sala, puntomapa, availability }) => {
     <TouchableOpacity style={[styles.roomContainer, roomStyle]} onPress={toggleRoomState}>
       <Text style={styles.roomText}>{sala}</Text>
       <View>
-        <Switch
-          trackColor={{ false: "#ff4d4d", true: "#33cc33" }}
-          thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
-          value={isEnabled}
-          onValueChange={toggleRoomState}
-        />
+        {isUpdating ? (
+          <ActivityIndicator size={"large"} color={"white"} />
+        ) : (
+          <Switch
+            trackColor={{ false: "#ff4d4d", true: "#33cc33" }}
+            thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+            value={isEnabled ? true : false}
+            onValueChange={toggleRoomState}
+          />
+        )}
       </View>
     </TouchableOpacity>
   );
@@ -60,3 +72,6 @@ const styles = StyleSheet.create({
 });
 
 export default Room;
+function useRoomUpdater(): { isUpdating: any; updateRoomState: any } {
+  throw new Error("Function not implemented.");
+}

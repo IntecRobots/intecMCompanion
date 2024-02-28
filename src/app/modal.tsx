@@ -1,11 +1,9 @@
-import { StatusBar } from "expo-status-bar";
-import { Platform, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { Text, View } from "@/src/components/Themed";
 import { useSession } from "@/src/context/ctx";
 import { useEffect, useState } from "react";
-
 
 export default function ModalScreen() {
   const { session } = useSession();
@@ -14,10 +12,11 @@ export default function ModalScreen() {
   useEffect(() => {
     const loadToken = async () => {
       const token = await AsyncStorage.getItem("pushtoken");
-      setToken(token)
+      setToken(token);
     };
+    loadToken();
   }, []);
-  
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Sesión iniciada</Text>
