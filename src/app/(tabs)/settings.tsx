@@ -1,12 +1,17 @@
 import { useSession } from "@/src/context/ctx";
 import { Switch, Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { GoogleSignin, GoogleSigninButton, statusCodes } from "@react-native-google-signin/google-signin";
 
 const Settings = () => {
   const { signOut } = useSession();
 
+  GoogleSignin.configure({
+    webClientId: '846381216746-2kl8npfsnbrmti0oaalcpuq8k13rtbn0.apps.googleusercontent.com', // client ID of type WEB for your server. Required to get the `idToken` on the user object, and for offline access.
+    scopes: ["https://www.googleapis.com/auth/calendar"], // what API you want to access on behalf of the user, default is email and profile
+  });
+
   return (
     <View style={styles.container}>
-
       <View style={styles.optionsContainer}>
         <TouchableOpacity style={styles.option} onPress={() => {}}>
           <Text style={styles.optionText}>Opciones app</Text>
@@ -25,8 +30,39 @@ const Settings = () => {
           <Text style={styles.optionText}>Modo oscuro</Text>
           <Switch />
         </View>
-
       </View>
+
+      <GoogleSigninButton
+        size={GoogleSigninButton.Size.Wide}
+        color={GoogleSigninButton.Color.Dark}
+        onPress={async () => {
+          try {
+            console.log("Checking for Google Play Services...");
+            await GoogleSignin.hasPlayServices();
+            console.log("Google Play Services are available.");
+
+            console.log("Attempting to sign in...");
+            const userInfo = await GoogleSignin.signIn();
+            console.log("Sign in successful:", userInfo);
+          } catch (error: any) {
+            console.error("Sign in error:", error);
+
+            if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+              console.warn("Sign in was cancelled by the user.");
+              // Handle sign in cancelled scenario
+            } else if (error.code === statusCodes.IN_PROGRESS) {
+              console.warn("Sign in is already in progress.");
+              // Handle the case where sign in is in progress
+            } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+              console.error("Google Play Services not available.");
+              // Handle the scenario where Google Play Services are not available
+            } else {
+              console.error("An unknown error occurred during Google Sign In.");
+              // Handle other unknown errors
+            }
+          }
+        }}
+      />
 
       <TouchableOpacity style={styles.button} onPress={() => signOut()}>
         <Text style={styles.buttonText}>Cerrar sesión</Text>

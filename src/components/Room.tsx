@@ -28,7 +28,6 @@ const Room: React.FC<RoomProps> = ({ id, sala, puntomapa, estado }) => {
   return (
     <TouchableOpacity style={[styles.roomContainer, roomStyle]} onPress={toggleRoomState}>
       <Text style={styles.roomText}>{sala}</Text>
-      /Users/fer/Library/Android/sdk
       <View>
         {isUpdating ? (
           <ActivityIndicator size={"large"} color={"white"} />
