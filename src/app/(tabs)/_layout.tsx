@@ -13,18 +13,24 @@ function TabBarIcon(props: { name: React.ComponentProps<typeof FontAwesome>["nam
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  // Colors[colorScheme ?? "light"].tint
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: "#5C6BC0",
+        tabBarActiveTintColor: "#3673F5",
         headerShown: useClientOnlyValue(false, true),
+        tabBarStyle: {
+          backgroundColor: "black",
+          borderTopColor: "#292929",
+          borderTopWidth: 1,
+          height: 65,
+        },
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
           title: "Home",
+          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
         }}
       />
@@ -32,6 +38,7 @@ export default function TabLayout() {
         name="notifications"
         options={{
           title: "Notificaciones",
+          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="bell" color={color} />,
         }}
       />
@@ -39,6 +46,7 @@ export default function TabLayout() {
         name="visitas"
         options={{
           title: "Visitas",
+          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="users" color={color} />,
         }}
       />
@@ -46,6 +54,7 @@ export default function TabLayout() {
         name="rooms"
         options={{
           title: "Salas",
+          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="coffee" color={color} />,
         }}
       />
@@ -53,6 +62,7 @@ export default function TabLayout() {
         name="settings"
         options={{
           title: "Opciones",
+          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="cog" color={color} />,
           headerRight: () => (
             <Link href="/modal" asChild>
