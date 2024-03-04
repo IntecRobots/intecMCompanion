@@ -12,7 +12,7 @@
         "buildType": "apk"
       },
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://t2o.intecrobots.com/api"
+        "EXPO_PUBLIC_API_URL": "https://demo.intecrobots.com/api"
       }
     },
     "preview2": {
@@ -26,7 +26,11 @@
     "preview4": {
       "distribution": "internal"
     },
-    "production": {}
+    "production": {
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://demo.intecrobots.com/api"
+      }
+    }
   },
   "submit": {
     "production": {}

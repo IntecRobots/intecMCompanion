@@ -1,26 +1,36 @@
 {
   "project_info": {
-    "project_number": "126451405844",
-    "project_id": "companion-4bef8",
-    "storage_bucket": "companion-4bef8.appspot.com"
+    "project_number": "846381216746",
+    "project_id": "expotest-415815",
+    "storage_bucket": "expotest-415815.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:126451405844:android:c694a6453173eac5224301",
+        "mobilesdk_app_id": "1:846381216746:android:342f67dea8444b07253893",
         "android_client_info": {
           "package_name": "com.fnv457.intecMCompanion"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "846381216746-2kl8npfsnbrmti0oaalcpuq8k13rtbn0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyATzckzX-xEvU6MmMhyaf0AskEVjNHaPNA"
+          "current_key": "AIzaSyD6Teuf7qrDue_fNjreMVsCD1WZiyFrjNg"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "846381216746-2kl8npfsnbrmti0oaalcpuq8k13rtbn0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

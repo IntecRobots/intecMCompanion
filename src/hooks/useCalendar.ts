@@ -26,7 +26,7 @@ const useCalendar = () => {
 
       const data = await response.json();
       setEvents(data.items);
-      console.log("Eventos del calendario recibidos:", data.items);
+      console.log("Eventos del calendario recibidos");
     } catch (error: any) {
       console.error("Error al solicitar los eventos del calendario:", error);
       setError(error.message);
