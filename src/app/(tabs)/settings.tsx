@@ -1,13 +1,14 @@
 import { useSession } from "@/src/context/ctx";
 import { Switch, Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { GoogleSignin, GoogleSigninButton, statusCodes } from "@react-native-google-signin/google-signin";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Settings = () => {
   const { signOut } = useSession();
 
   GoogleSignin.configure({
-    webClientId: '846381216746-2kl8npfsnbrmti0oaalcpuq8k13rtbn0.apps.googleusercontent.com', // client ID of type WEB for your server. Required to get the `idToken` on the user object, and for offline access.
-    scopes: ["https://www.googleapis.com/auth/calendar"], // what API you want to access on behalf of the user, default is email and profile
+    webClientId: '846381216746-2kl8npfsnbrmti0oaalcpuq8k13rtbn0.apps.googleusercontent.com',
+    scopes: ["https://www.googleapis.com/auth/calendar"],
   });
 
   return (
@@ -33,8 +34,8 @@ const Settings = () => {
       </View>
 
       <GoogleSigninButton
-        size={GoogleSigninButton.Size.Wide}
-        color={GoogleSigninButton.Color.Dark}
+        size={GoogleSigninButton.Size.Standard}
+        color={GoogleSigninButton.Color.Light}
         onPress={async () => {
           try {
             console.log("Checking for Google Play Services...");
@@ -43,6 +44,7 @@ const Settings = () => {
 
             console.log("Attempting to sign in...");
             const userInfo = await GoogleSignin.signIn();
+            await AsyncStorage.setItem('googletoken', userInfo.idToken as string);
             console.log("Sign in successful:", userInfo);
           } catch (error: any) {
             console.error("Sign in error:", error);

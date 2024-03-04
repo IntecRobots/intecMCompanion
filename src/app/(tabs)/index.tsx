@@ -1,25 +1,30 @@
+import useCalendar from "@/src/hooks/useCalendar";
 import React from "react";
-import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Image, ActivityIndicator } from "react-native";
 import { Dimensions } from "react-native";
 
 const screenWidth = Dimensions.get("window").width;
 
 const DashboardScreen = () => {
+  const { events, loading, error } = useCalendar();
 
-  const summaryData = [
-    { title: "Notificaciones", value: 14 },
-    { title: "Visitas", value: 5 },
-    { title: "Eventos", value: 10 },
-    { title: "To-dos", value: 4 },
-  ];
+  if (loading) {
+    return <ActivityIndicator />;
+  }
+
+  if (error) {
+    return <Text>Error: {error}</Text>;
+  }
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.summaryContainer}>
-        {summaryData.map((item, index) => (
+        {events.map((event: any, index: number) => (
           <View key={index} style={styles.summaryBoxWrapper}>
             <View style={styles.summaryBox}>
-              <Text style={styles.summaryTitle}>{item.title}</Text>
-              <Text style={styles.summaryValue}>{item.value}</Text>
+              <Text style={{ color: "white" }} key={event.id}>
+                {event.summary}
+              </Text>
             </View>
           </View>
         ))}
@@ -52,14 +57,14 @@ const styles = StyleSheet.create({
     color: "white",
   },
   summaryContainer: {
-    flexDirection: "row", // Se mantiene horizontal
-    flexWrap: "wrap", // Permite el ajuste automático de los elementos
-    justifyContent: "space-between", // Distribuye el espacio restante
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
     padding: 10,
   },
   summaryBoxWrapper: {
-    width: "50%", // Cada envoltorio ocupa el 50% del contenedor
-    padding: 10, // Espaciado entre las tarjetas
+    width: "50%",
+    padding: 10,
   },
   summaryBox: {
     backgroundColor: "#242424",
