@@ -13,8 +13,6 @@ const Room: React.FC<RoomProps> = ({ id, sala, puntomapa, estado }) => {
   const [isEnabled, setIsEnabled] = useState<boolean>(estado);
   const { isUpdating, updateRoomState } = useRoomUpdate();
 
-  console.log(estado);
-
   const toggleRoomState = async () => {
     if (isUpdating || !id) return;
 
@@ -27,14 +25,17 @@ const Room: React.FC<RoomProps> = ({ id, sala, puntomapa, estado }) => {
 
   return (
     <TouchableOpacity style={[styles.roomContainer, roomStyle]} onPress={toggleRoomState}>
-      <Text style={styles.roomText}>{sala}</Text>
+      <View>
+        <Text style={styles.roomText}>{sala}</Text>
+        <Text style={styles.mapText}>{puntomapa}</Text>
+      </View>
       <View>
         {isUpdating ? (
           <ActivityIndicator size={"large"} color={"white"} />
         ) : (
           <Switch
-            trackColor={{ false: "#ff4d4d", true: "#33cc33" }}
-            thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+            trackColor={{ false: "gray", true: "lightgray" }}
+            thumbColor={"white"}
             value={isEnabled ? true : false}
             onValueChange={toggleRoomState}
           />
@@ -54,20 +55,24 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: 20,
+    padding: 15,
     margin: 10,
     width: "90%",
     borderRadius: 10,
   },
   roomAvailable: {
-    backgroundColor: "#33cc33", // Verde para disponible
+    backgroundColor: "#3673F5",
   },
   roomOccupied: {
-    backgroundColor: "#ff4d4d", // Rojo para ocupado
+    backgroundColor: "#242424",
   },
   roomText: {
     color: "white",
-    fontWeight: "bold",
+    fontFamily: "PoppinsSemiBold",
+  },
+  mapText: {
+    color: "white",
+    fontFamily: "Poppins",
   },
 });
 

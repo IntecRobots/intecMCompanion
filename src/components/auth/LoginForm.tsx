@@ -73,10 +73,10 @@ const styles = StyleSheet.create({
   },
   loginTitle: {
     fontSize: 24,
-    fontWeight: "bold",
     color: "#ffffff",
     marginBottom: 20,
     textAlign: "center",
+    fontFamily: 'PoppinsBold'
   },
   input: {
     backgroundColor: "#E8EAF6",
@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
     height: 50,
     marginBottom: 15,
     borderRadius: 5,
+    fontFamily: 'Poppins',
     paddingHorizontal: 10,
     fontSize: 16,
   },
@@ -97,12 +98,13 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#ffffff",
     fontSize: 16,
-    fontWeight: "bold",
+    fontFamily: 'PoppinsBold'
   },
   signupText: {
     marginTop: 20,
     color: "#ffffff",
     textAlign: "center",
+    fontFamily: 'Poppins'
   },
   signupLink: {
     color: "#3F51B5",
@@ -111,7 +113,7 @@ const styles = StyleSheet.create({
   footerText: {
     marginTop: 15,
     color: "#7d7d7d",
-    fontWeight: "bold",
+    fontFamily: 'PoppinsBold'
   },
 });
 

@@ -16,6 +16,7 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
+        tabBarLabelStyle: { fontFamily: "PoppinsSemiBold" },
         tabBarActiveTintColor: "#3673F5",
         headerShown: useClientOnlyValue(false, true),
         headerStyle: {
@@ -33,13 +34,14 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Home",
-          headerShown: false,
+          headerTitleStyle: { fontFamily: "PoppinsSemiBold" },
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
         }}
       />
       <Tabs.Screen
         name="notifications"
         options={{
+          headerTitleStyle: { fontFamily: "PoppinsSemiBold" },
           title: "Notificaciones",
           tabBarIcon: ({ color }) => <TabBarIcon name="bell" color={color} />,
         }}
@@ -47,6 +49,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="visitas"
         options={{
+          headerTitleStyle: { fontFamily: "PoppinsSemiBold" },
           title: "Visitas",
           tabBarIcon: ({ color }) => <TabBarIcon name="users" color={color} />,
         }}
@@ -54,6 +57,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="rooms"
         options={{
+          headerTitleStyle: { fontFamily: "PoppinsSemiBold" },
           title: "Salas",
           tabBarIcon: ({ color }) => <TabBarIcon name="coffee" color={color} />,
         }}
