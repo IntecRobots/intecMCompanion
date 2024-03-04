@@ -18,6 +18,9 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: "#3673F5",
         headerShown: useClientOnlyValue(false, true),
+        headerStyle: {
+          backgroundColor: "black",
+        },
         tabBarStyle: {
           backgroundColor: "black",
           borderTopColor: "#292929",
@@ -38,7 +41,6 @@ export default function TabLayout() {
         name="notifications"
         options={{
           title: "Notificaciones",
-          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="bell" color={color} />,
         }}
       />
@@ -46,7 +48,6 @@ export default function TabLayout() {
         name="visitas"
         options={{
           title: "Visitas",
-          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="users" color={color} />,
         }}
       />
@@ -54,7 +55,6 @@ export default function TabLayout() {
         name="rooms"
         options={{
           title: "Salas",
-          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="coffee" color={color} />,
         }}
       />

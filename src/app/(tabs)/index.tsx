@@ -1,3 +1,4 @@
+import { MonoText } from "@/src/components/StyledText";
 import useCalendar from "@/src/hooks/useCalendar";
 import React from "react";
 import { View, Text, StyleSheet, ScrollView, Image, ActivityIndicator } from "react-native";
@@ -22,9 +23,9 @@ const DashboardScreen = () => {
         {events.map((event: any, index: number) => (
           <View key={index} style={styles.summaryBoxWrapper}>
             <View style={styles.summaryBox}>
-              <Text style={{ color: "white" }} key={event.id}>
+              <MonoText style={{ color: "white" }} key={event.id}>
                 {event.summary}
-              </Text>
+              </MonoText>
             </View>
           </View>
         ))}

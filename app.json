@@ -12,7 +12,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.fnv457.intecMCompanion"
@@ -38,7 +40,8 @@
         {
           "iosUrlScheme": "com.googleusercontent.apps.320328755483-7or0e1fcrs54h7rp9mh4hq4h3qmg3q21"
         }
-      ]
+      ],
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
