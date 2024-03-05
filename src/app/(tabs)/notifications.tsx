@@ -37,7 +37,7 @@ const Notifications = () => {
   if (isLoading) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size={120} color="#5C6BC0" />
+        <ActivityIndicator size={120} color="#3673F5" />
       </View>
     );
   }

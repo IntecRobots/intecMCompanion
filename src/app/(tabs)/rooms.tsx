@@ -20,7 +20,7 @@ const Rooms = () => {
   if (isLoading) {
     return (
       <View style={styles.centered}>
-        <ActivityIndicator size="large" color="#5C6BC0" />
+        <ActivityIndicator size="large" color="#3673F5" />
       </View>
     );
   }

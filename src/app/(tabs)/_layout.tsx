@@ -66,7 +66,7 @@ export default function TabLayout() {
         name="settings"
         options={{
           title: "Opciones",
-          headerShown: false,
+          // headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="cog" color={color} />,
           headerRight: () => (
             <Link href="/modal" asChild>

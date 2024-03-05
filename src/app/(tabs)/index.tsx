@@ -1,16 +1,19 @@
-import { MonoText } from "@/src/components/StyledText";
-import useCalendar from "@/src/hooks/useCalendar";
 import React from "react";
-import { View, Text, StyleSheet, ScrollView, Image, ActivityIndicator } from "react-native";
-import { Dimensions } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Button, Dimensions, ActivityIndicator } from "react-native";
+import useCalendar from "@/src/hooks/useCalendar";
+import { useNavigation } from "expo-router";
+import ButtonCard from "@/src/components/ButtonCard";
 
-const screenWidth = Dimensions.get("window").width;
-
-const DashboardScreen = () => {
+const DashboardScreen: React.FC = () => {
   const { events, loading, error } = useCalendar();
+  // const navigation: any = useNavigation(); // Descomentar si vas a usar la navegación
 
   if (loading) {
-    return <ActivityIndicator />;
+    return (
+      <View style={styles.centered}>
+        <ActivityIndicator size={120} color="#3673F5" />
+      </View>
+    );
   }
 
   if (error) {
@@ -19,49 +22,70 @@ const DashboardScreen = () => {
 
   return (
     <ScrollView style={styles.container}>
+      {/*  <LinearGradient
+              colors={["#000044", "black"]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.container}
+            >*/}
+      {/*  </LinearGradient>>*/}
+      <Text style={styles.titleText}>Bienvenido</Text>
+      <View style={styles.buttonContainer}>
+        <ButtonCard title="Videollamada" iconName="video" onPress={() => {}} />
+        <ButtonCard title="Control remoto" iconName="heart" onPress={() => {}} />
+        <ButtonCard title="Añadir evento" iconName="calendar" onPress={() => {}} />
+        <ButtonCard title="Gestionar salas" iconName="star" onPress={() => {}} />
+      </View>
+      <Text style={styles.titleText}>Próximos eventos</Text>
       <View style={styles.summaryContainer}>
-        {events.map((event: any, index: number) => (
+        {events ? events.slice(-4).map((event: any, index: number) => (
           <View key={index} style={styles.summaryBoxWrapper}>
             <View style={styles.summaryBox}>
-              <MonoText style={{ color: "white" }} key={event.id}>
+              <Text style={styles.eventText} numberOfLines={2} key={event.id}>
                 {event.summary}
-              </MonoText>
+              </Text>
+              <Text style={styles.eventText}>{event.start.dateTime}</Text>
             </View>
           </View>
-        ))}
+        )) : <Text>Inicia sesión con Google para ver tus eventos de Calendar.</Text>}
       </View>
-      <Image style={styles.fullWidthImage} source={require("../../../assets/images/placeholderbot2.jpeg")} />
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  fullWidthImage: {
-    width: screenWidth,
+  centered: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   container: {
     flex: 1,
   },
-  headerText: {
+  titleText: {
+    color: "white",
+    fontSize: 25,
+    marginLeft: 15,
+    fontFamily: "PoppinsMedium",
+    paddingVertical: 15,
+  },
+  eventText: {
+    color: "white",
+    fontFamily: "Poppins",
+  },
+  welcomeTitle: {
     fontSize: 24,
-    fontWeight: "bold",
     color: "white",
-  },
-  summaryTitle: {
-    fontSize: 16,
-    marginBottom: 5,
-    color: "white",
-  },
-  summaryValue: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "white",
+    textAlign: "center",
+    marginVertical: 20,
   },
   summaryContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
     padding: 10,
+    borderTopWidth: 1,
+    borderColor: "#292929",
   },
   summaryBoxWrapper: {
     width: "50%",
@@ -70,13 +94,16 @@ const styles = StyleSheet.create({
   summaryBox: {
     backgroundColor: "#242424",
     borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
     padding: 15,
     alignItems: "center",
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+    borderTopWidth: 1,
+    borderColor: "#292929",
+    paddingVertical: 10
   },
 });
 
