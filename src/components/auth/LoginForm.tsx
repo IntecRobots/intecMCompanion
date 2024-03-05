@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   button: {
-    backgroundColor: "#3F51B5",
+    backgroundColor: "#3673F5",
     paddingVertical: 15,
     borderRadius: 5,
     alignItems: "center",
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins'
   },
   signupLink: {
-    color: "#3F51B5",
+    color: "#3673F5",
     fontWeight: "bold",
   },
   footerText: {

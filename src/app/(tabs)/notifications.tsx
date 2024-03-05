@@ -46,18 +46,19 @@ const Notifications = () => {
     <View style={styles.container}>
       <View style={styles.tabs}>
         <Pressable onPress={() => setActiveTab("all")} style={[styles.tab, activeTab === "all" && styles.activeTab]}>
-          <Text style={styles.tabText}>Todas</Text>
+          <Text style={[styles.tabText, activeTab === "all" && styles.activeTabText]}>Todas</Text>
         </Pressable>
         <Pressable onPress={() => setActiveTab("unread")} style={[styles.tab, activeTab === "unread" && styles.activeTab]}>
-          <Text style={styles.tabText}>No leídas</Text>
+          <Text style={[styles.tabText, activeTab === "unread" && styles.activeTabText]}>No leídas</Text>
         </Pressable>
       </View>
-      <Button onPress={() => clearNotifications()} title="clear" />
       <ScrollView style={styles.notificationsContainer}>
         {notifications.length ? (
-          notifications
-            .reverse()
-            .map((notification: any, k: number) => (
+          <>
+            <Pressable onPress={() => clearNotifications()}>
+              <Text style={styles.clearText}>Clear</Text>
+            </Pressable>
+            {notifications.reverse().map((notification: any, k: number) => (
               <Notification
                 key={k}
                 body={notification?.request?.content?.body}
@@ -65,7 +66,8 @@ const Notifications = () => {
                 isRead={notification.isRead}
                 showButtons={notification?.request?.content?.data?.showButtons}
               />
-            ))
+            ))}
+          </>
         ) : (
           <Text style={styles.noNotificationsText}>You have no notifications</Text>
         )}
@@ -77,7 +79,11 @@ const Notifications = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#121212",
+  },
+  clearText: {
+    color: "white",
+    textAlign: "right",
+    padding: 15,
   },
   navigationBar: {
     flexDirection: "row",
@@ -98,10 +104,15 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     padding: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: "#292929",
   },
   activeTab: {
     borderBottomWidth: 3,
-    borderBottomColor: "#007bff",
+    borderBottomColor: "#3673F5",
+  },
+  activeTabText: {
+    color: "#3673F5",
   },
   tabText: {
     color: "white",

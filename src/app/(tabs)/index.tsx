@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, ScrollView, Button, Dimensions, ActivityIndicator } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Button, Dimensions, ActivityIndicator, Image } from "react-native";
 import useCalendar from "@/src/hooks/useCalendar";
 import { useNavigation } from "expo-router";
 import ButtonCard from "@/src/components/ButtonCard";
@@ -7,6 +7,8 @@ import ButtonCard from "@/src/components/ButtonCard";
 const DashboardScreen: React.FC = () => {
   const { events, loading, error } = useCalendar();
   // const navigation: any = useNavigation();
+  console.log(error);
+
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
     const day = date.getDate().toString().padStart(2, "0");
@@ -23,13 +25,9 @@ const DashboardScreen: React.FC = () => {
     );
   }
 
-  if (error) {
-    return <Text>Error: {error}</Text>;
-  }
-
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.titleText}>Bienvenido</Text>
+      <Text style={styles.titleText}>Bienvenido, User</Text>
       <View style={styles.buttonContainer}>
         <ButtonCard title="Añadir evento" iconName="calendar" onPress={() => {}} />
         <ButtonCard title="Control remoto" iconName="robot" onPress={() => {}} />
@@ -38,7 +36,7 @@ const DashboardScreen: React.FC = () => {
       </View>
       <Text style={styles.titleText}>Próximos eventos</Text>
       <View style={styles.summaryContainer}>
-        {events ? (
+        {!error ? (
           events.slice(-4).map((event: any, index: number) => (
             <View key={index} style={styles.summaryBoxWrapper}>
               <View style={styles.summaryBox}>
@@ -51,7 +49,10 @@ const DashboardScreen: React.FC = () => {
             </View>
           ))
         ) : (
-          <Text>Inicia sesión con Google para ver tus eventos de Calendar.</Text>
+          <View style={styles.centered}>
+            <Text style={styles.error}>{error ? error : "Inicia sesión con Google para ver tus eventos de Calendar."}</Text>
+            <Image source={require("../../../assets/images/errorRobot.png")} style={styles.errorImage} />
+          </View>
         )}
       </View>
     </ScrollView>
@@ -59,6 +60,8 @@ const DashboardScreen: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
+  errorImage: { height: 200, width: 200 },
+  error: { marginBottom: 30, color: "white", marginTop: 10 },
   centered: {
     flex: 1,
     justifyContent: "center",

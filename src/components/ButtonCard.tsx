@@ -13,7 +13,7 @@ const screenWidth = Dimensions.get("window").width;
 const ButtonCard: React.FC<ButtonCardProps> = ({ title, iconName, onPress }) => {
   return (
     <TouchableOpacity style={styles.card} onPress={onPress}>
-      <FontAwesome5 name={iconName} size={20} color="#3673F5" />
+      <FontAwesome5 name={iconName} size={30} color="#3673F5" />
       <Text style={styles.cardText}>{title}</Text>
     </TouchableOpacity>
   );

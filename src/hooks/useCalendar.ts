@@ -1,35 +1,30 @@
 import { useState, useEffect } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 const useCalendar = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
-  const fetchCalendarEvents = async () => {
+  const fetchCalendarEvents = async (accessToken: any) => {
     try {
       console.log("Solicitando eventos del calendario...");
-      const tokens = await GoogleSignin.getTokens()
-      console.log(tokens);
-      
-      
       const response = await fetch("https://www.googleapis.com/calendar/v3/calendars/primary/events", {
         headers: {
-          Authorization: `Bearer ${tokens.accessToken}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       });
 
       if (!response.ok) {
-        throw new Error(`Error en la respuesta de la API: ${JSON.stringify(response)}`);
+        setError("Error en la solicitud a la API del calendario");
       }
 
       const data = await response.json();
       setEvents(data.items);
       console.log("Eventos del calendario recibidos");
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error al solicitar los eventos del calendario:", error);
-      setError(error.message);
+      setError("Error en la solicitud a la API del calendario");
     } finally {
       setLoading(false);
     }
@@ -38,15 +33,12 @@ const useCalendar = () => {
   useEffect(() => {
     const getAccessTokenAndFetchEvents = async () => {
       try {
-        console.log("Obteniendo token de acceso desde AsyncStorage...");
-        const accessToken = await AsyncStorage.getItem("googletoken");
-        if (!accessToken) {
-          throw new Error("No hay token de acceso disponible");
-        }
-        await fetchCalendarEvents();
+        console.log("Obteniendo token...");
+        const tokens = await GoogleSignin.getTokens();
+        console.log(tokens);
+        await fetchCalendarEvents(tokens.accessToken);
       } catch (error: any) {
-        console.error("Error en useCalendar:", error);
-        setError(error.message);
+        setError("Inicia sesión con Google para ver tus eventos de Calendar");
         setLoading(false);
       }
     };
