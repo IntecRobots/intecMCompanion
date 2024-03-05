@@ -6,7 +6,14 @@ import ButtonCard from "@/src/components/ButtonCard";
 
 const DashboardScreen: React.FC = () => {
   const { events, loading, error } = useCalendar();
-  // const navigation: any = useNavigation(); // Descomentar si vas a usar la navegación
+  // const navigation: any = useNavigation();
+  const formatDate = (dateStr: string) => {
+    const date = new Date(dateStr);
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
 
   if (loading) {
     return (
@@ -22,32 +29,30 @@ const DashboardScreen: React.FC = () => {
 
   return (
     <ScrollView style={styles.container}>
-      {/*  <LinearGradient
-              colors={["#000044", "black"]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              style={styles.container}
-            >*/}
-      {/*  </LinearGradient>>*/}
       <Text style={styles.titleText}>Bienvenido</Text>
       <View style={styles.buttonContainer}>
-        <ButtonCard title="Videollamada" iconName="video" onPress={() => {}} />
-        <ButtonCard title="Control remoto" iconName="heart" onPress={() => {}} />
         <ButtonCard title="Añadir evento" iconName="calendar" onPress={() => {}} />
-        <ButtonCard title="Gestionar salas" iconName="star" onPress={() => {}} />
+        <ButtonCard title="Control remoto" iconName="robot" onPress={() => {}} />
+        <ButtonCard title="Videollamada" iconName="video" onPress={() => {}} />
+        <ButtonCard title="Gestionar salas" iconName="table" onPress={() => {}} />
       </View>
       <Text style={styles.titleText}>Próximos eventos</Text>
       <View style={styles.summaryContainer}>
-        {events ? events.slice(-4).map((event: any, index: number) => (
-          <View key={index} style={styles.summaryBoxWrapper}>
-            <View style={styles.summaryBox}>
-              <Text style={styles.eventText} numberOfLines={2} key={event.id}>
-                {event.summary}
-              </Text>
-              <Text style={styles.eventText}>{event.start.dateTime}</Text>
+        {events ? (
+          events.slice(-4).map((event: any, index: number) => (
+            <View key={index} style={styles.summaryBoxWrapper}>
+              <View style={styles.summaryBox}>
+                <Text style={styles.eventTitleText} numberOfLines={2} key={event.id}>
+                  {event.summary}
+                </Text>
+                <Text style={styles.eventCreatorText}>Estado: {event.status}</Text>
+                <Text style={styles.eventDateText}>{formatDate(event.start.dateTime)}</Text>
+              </View>
             </View>
-          </View>
-        )) : <Text>Inicia sesión con Google para ver tus eventos de Calendar.</Text>}
+          ))
+        ) : (
+          <Text>Inicia sesión con Google para ver tus eventos de Calendar.</Text>
+        )}
       </View>
     </ScrollView>
   );
@@ -66,10 +71,19 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 25,
     marginLeft: 15,
-    fontFamily: "PoppinsMedium",
+    fontFamily: "PoppinsSemiBold",
     paddingVertical: 15,
   },
-  eventText: {
+  eventTitleText: {
+    marginBottom: 20,
+    color: "white",
+    fontFamily: "PoppinsSemiBold",
+  },
+  eventDateText: {
+    color: "#3673F5",
+    fontFamily: "Poppins",
+  },
+  eventCreatorText: {
     color: "white",
     fontFamily: "Poppins",
   },
@@ -103,7 +117,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     borderTopWidth: 1,
     borderColor: "#292929",
-    paddingVertical: 10
+    paddingVertical: 10,
   },
 });
 

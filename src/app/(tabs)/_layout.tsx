@@ -18,6 +18,7 @@ export default function TabLayout() {
       screenOptions={{
         tabBarLabelStyle: { fontFamily: "PoppinsSemiBold" },
         tabBarActiveTintColor: "#3673F5",
+        tabBarInactiveTintColor: "white",
         headerShown: useClientOnlyValue(false, true),
         headerStyle: {
           backgroundColor: "black",
