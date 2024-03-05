@@ -11,7 +11,7 @@ const DashboardScreen: React.FC = () => {
   if (loading) {
     return (
       <View style={styles.centered}>
-        <ActivityIndicator size={120} color="#3673F5" />
+        <ActivityIndicator size={110} color="#3673F5" />
       </View>
     );
   }

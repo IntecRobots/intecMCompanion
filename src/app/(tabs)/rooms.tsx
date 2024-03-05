@@ -20,7 +20,7 @@ const Rooms = () => {
   if (isLoading) {
     return (
       <View style={styles.centered}>
-        <ActivityIndicator size="large" color="#3673F5" />
+        <ActivityIndicator size={110} color="#3673F5" />
       </View>
     );
   }
@@ -39,17 +39,19 @@ const Rooms = () => {
         <FontAwesome5 name="search" size={20} color="#868A90" style={styles.searchIcon} />
         <TextInput style={styles.input} onChangeText={setSearchQuery} value={searchQuery} placeholder="Busca" placeholderTextColor="#868A90" />
       </View>
-      {rooms?.records?.map((room: any, index: number) => (
-        <Room key={index} sala={room.sala} estado={room.estado} id={room.id} puntomapa={room.puntomapa} />
-      ))}
+      <View style={styles.centered}>
+        {rooms?.records?.map((room: any, index: number) => (
+          <Room key={index} sala={room.sala} estado={room.estado} id={room.id} puntomapa={room.puntomapa} />
+        ))}
+      </View>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   searchSection: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     fontSize: 16,
     backgroundColor: "#141518",
     height: 40,
@@ -68,7 +70,7 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     paddingBottom: 10,
     paddingLeft: 0,
-    color: '#424242',
+    color: "#424242",
     fontSize: 16,
   },
   title: {
@@ -86,6 +88,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    borderTopWidth: 1,
+    borderColor: "#292929",
+    paddingVertical: 10
   },
 });
 
