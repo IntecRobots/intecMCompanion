@@ -52,12 +52,12 @@ const Notifications = () => {
           <Text style={[styles.tabText, activeTab === "unread" && styles.activeTabText]}>No leídas</Text>
         </Pressable>
       </View>
-      <ScrollView style={styles.notificationsContainer}>
-        {notifications.length ? (
-          <>
-            <Pressable onPress={() => clearNotifications()}>
-              <Text style={styles.clearText}>Clear</Text>
-            </Pressable>
+      {notifications.length ? (
+        <>
+          <Pressable onPress={() => clearNotifications()}>
+            <Text style={styles.clearText}>Clear notifications</Text>
+          </Pressable>
+          <ScrollView style={styles.notificationsContainer}>
             {notifications.reverse().map((notification: any, k: number) => (
               <Notification
                 key={k}
@@ -67,11 +67,11 @@ const Notifications = () => {
                 showButtons={notification?.request?.content?.data?.showButtons}
               />
             ))}
-          </>
-        ) : (
-          <Text style={styles.noNotificationsText}>You have no notifications</Text>
-        )}
-      </ScrollView>
+          </ScrollView>
+        </>
+      ) : (
+        <Text style={styles.noNotificationsText}>You have no notifications</Text>
+      )}
     </View>
   );
 };
@@ -81,8 +81,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   clearText: {
-    color: "white",
+    color: "#bdbdbd",
     textAlign: "right",
+    fontSize: 15,
     padding: 15,
   },
   navigationBar: {

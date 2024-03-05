@@ -32,9 +32,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#242424",
     flexDirection: "row",
     alignItems: "center",
-    padding: 10,
-    borderRadius: 10,
-    marginVertical: 7,
+    padding: 20,
     marginHorizontal: 10,
   },
   image: {
