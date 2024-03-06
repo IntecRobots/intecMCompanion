@@ -35,7 +35,6 @@ const useCalendar = () => {
       try {
         console.log("Obteniendo token...");
         const tokens = await GoogleSignin.getTokens();
-        console.log(tokens);
         await fetchCalendarEvents(tokens.accessToken);
       } catch (error: any) {
         setError("Inicia sesión con Google para ver tus eventos de Calendar");

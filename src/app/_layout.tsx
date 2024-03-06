@@ -124,6 +124,7 @@ export default function RootLayout() {
     PoppinsBold: require("../../assets/fonts/Poppins-Bold.ttf"),
     PoppinsSemiBold: require("../../assets/fonts/Poppins-SemiBold.ttf"),
     PoppinsMedium: require("../../assets/fonts/Poppins-Medium.ttf"),
+    PoppinsItalic: require("../../assets/fonts/Poppins-Italic.ttf"),
     ...FontAwesome.font,
   });
   const [expoPushToken, setExpoPushToken] = useState<any>("");

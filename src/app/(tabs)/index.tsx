@@ -7,7 +7,6 @@ import ButtonCard from "@/src/components/ButtonCard";
 const DashboardScreen: React.FC = () => {
   const { events, loading, error } = useCalendar();
   // const navigation: any = useNavigation();
-  console.log(error);
 
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);

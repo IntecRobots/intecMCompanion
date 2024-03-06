@@ -1,8 +1,7 @@
-import { StyleSheet, Text } from "react-native";
+import { Text } from "react-native";
 
-import { View } from "@/src/components/Themed";
 import LoginForm from "@/src/components/auth/LoginForm";
-import { Link, Redirect } from "expo-router";
+import { Redirect } from "expo-router";
 import { useSession } from "@/src/context/ctx";
 
 const Home = () => {

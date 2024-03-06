@@ -4,20 +4,43 @@ import { View, Text, Image, StyleSheet } from "react-native"; // Importa Image y
 interface VisitCardProps {
   title: string;
   description: string;
-  visitors: string[];
-  date: string;
-  imageUrl: string;
+  room: string;
+  startDate: string;
+  startTime: string;
 }
 
-const VisitCard: React.FC<VisitCardProps> = ({ title, description, visitors, date, imageUrl }) => {
+const VisitCard: React.FC<VisitCardProps> = ({
+  title,
+  description,
+  room,
+  startDate,
+  startTime,
+}) => {
   return (
     <View style={styles.cardContainer}>
-      <Image source={require("../../assets/images/placeholder.jpg")} style={styles.image} />
+      <Image
+        source={require("../../assets/images/placeholder.jpg")}
+        style={styles.image}
+      />
       <View style={styles.textContainer}>
-        <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">{title}</Text>
-        <Text style={styles.description} numberOfLines={2} ellipsizeMode="tail">{description}</Text>
-        <Text style={styles.italicText}>{date}</Text>
-        <Text style={styles.boldText}>{visitors.length} visitantes</Text>
+        <View>
+          <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
+            {title}
+          </Text>
+          <Text
+            style={styles.description}
+            numberOfLines={2}
+            ellipsizeMode="tail"
+          >
+            {description}
+          </Text>
+        </View>
+        <View style={{marginTop: 10}}>
+          <Text style={styles.italicText}>
+            {startDate} - {startTime}
+          </Text>
+          <Text style={styles.boldText}>{room}</Text>
+        </View>
       </View>
     </View>
   );
@@ -31,7 +54,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     margin: 20,
     overflow: "hidden",
-    height: 150,
+    height: 140,
   },
   image: {
     width: 120,
@@ -41,26 +64,28 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    justifyContent: 'space-between',
   },
   title: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontFamily: "PoppinsBold",
     color: "white",
   },
   description: {
     color: "#CCCCCC",
-    overflow: 'hidden',
+    fontSize: 13,
+    fontFamily: "Poppins",
+    overflow: "hidden",
   },
   boldText: {
-    fontWeight: "bold",
-    color: "#5C6BC0",
+    fontFamily: "PoppinsBold",
+    fontSize: 13,
+    color: "#3673F5",
   },
   italicText: {
-    fontStyle: "italic",
+    fontFamily: "PoppinsItalic",
+    fontSize: 13,
     color: "white",
   },
 });
-
 
 export default VisitCard;
