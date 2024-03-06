@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     color: "#bdbdbd",
     textAlign: "right",
     fontSize: 15,
-    padding: 15,
+    padding: 10,
   },
   navigationBar: {
     flexDirection: "row",

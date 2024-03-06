@@ -9,11 +9,19 @@ interface NotificationProps {
   showButtons: boolean;
 }
 
-const Notification: React.FC<NotificationProps> = ({ title, body, isRead, showButtons }) => {
+const Notification: React.FC<NotificationProps> = ({
+  title,
+  body,
+  isRead,
+  showButtons,
+}) => {
   return (
-    <View style={[styles.container, isRead ? null : styles.unreadContainer]}>
-      {!isRead && <View style={styles.unreadIndicator}></View>}
-      <Image source={require("../../assets/images/placeholder.jpg")} style={styles.image} />
+    <View  style={[styles.container, isRead ? null : styles.unreadContainer]}>
+      {/* !isRead && <View style={styles.unreadIndicator}></View> */}
+      <Image
+        source={require("../../assets/images/placeholder.jpg")}
+        style={styles.image}
+      />
       <View style={styles.textContainer}>
         <Text style={{ fontWeight: "bold" }}>{title}</Text>
         <Text>{body}</Text>
@@ -29,24 +37,25 @@ const Notification: React.FC<NotificationProps> = ({ title, body, isRead, showBu
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#242424",
     flexDirection: "row",
     alignItems: "center",
     padding: 20,
-    marginHorizontal: 10,
+    marginHorizontal: 0,
+    borderTopWidth: 1,
+    borderColor: "#292929",
   },
   image: {
     width: 50,
     height: 50,
     borderRadius: 25,
     marginRight: 10,
-    marginLeft: 20,
+    marginLeft: 5,
   },
   textContainer: {
     flex: 1,
   },
   unreadContainer: {
-    backgroundColor: "#2A4D69",
+    backgroundColor: "rgba(54, 115, 245, 0.3)",
   },
   title: {
     fontSize: 16,
