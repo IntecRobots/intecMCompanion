@@ -15,5 +15,5 @@ npm install
 
 ```bash
 cd intecMCompanion
-npx expo start
+npx expo run
 ```
