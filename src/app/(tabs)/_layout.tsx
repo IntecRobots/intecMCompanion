@@ -67,7 +67,7 @@ export default function TabLayout() {
         name="settings"
         options={{
           title: "Opciones",
-          // headerShown: false,
+          headerTitleStyle: { fontFamily: "PoppinsSemiBold" },
           tabBarIcon: ({ color }) => <TabBarIcon name="cog" color={color} />,
           headerRight: () => (
             <Link href="/modal" asChild>
