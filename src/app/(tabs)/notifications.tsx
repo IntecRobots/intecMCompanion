@@ -1,11 +1,20 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { ScrollView, View, Text, Pressable, StyleSheet, Image, Button, ActivityIndicator } from "react-native";
+import {
+  ScrollView,
+  View,
+  Text,
+  Pressable,
+  StyleSheet,
+  Image,
+  Button,
+  ActivityIndicator,
+} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Notification from "@/src/components/Notification";
 import { useFocusEffect } from "expo-router";
 
 const Notifications = () => {
-  const [activeTab, setActiveTab] = useState("all");
+  const [activeTab, setActiveTab] = useState("unread");
   const [isLoading, setIsLoading] = useState(false);
   const [notifications, setNotifications] = useState<any>([]);
 
@@ -45,11 +54,31 @@ const Notifications = () => {
   return (
     <View style={styles.container}>
       <View style={styles.tabs}>
-        <Pressable onPress={() => setActiveTab("all")} style={[styles.tab, activeTab === "all" && styles.activeTab]}>
-          <Text style={[styles.tabText, activeTab === "all" && styles.activeTabText]}>Todas</Text>
+        <Pressable
+          onPress={() => setActiveTab("unread")}
+          style={[styles.tab, activeTab === "unread" && styles.activeTab]}
+        >
+          <Text
+            style={[
+              styles.tabText,
+              activeTab === "unread" && styles.activeTabText,
+            ]}
+          >
+            No leídas
+          </Text>
         </Pressable>
-        <Pressable onPress={() => setActiveTab("unread")} style={[styles.tab, activeTab === "unread" && styles.activeTab]}>
-          <Text style={[styles.tabText, activeTab === "unread" && styles.activeTabText]}>No leídas</Text>
+        <Pressable
+          onPress={() => setActiveTab("all")}
+          style={[styles.tab, activeTab === "all" && styles.activeTab]}
+        >
+          <Text
+            style={[
+              styles.tabText,
+              activeTab === "all" && styles.activeTabText,
+            ]}
+          >
+            Todas
+          </Text>
         </Pressable>
       </View>
       {notifications.length ? (
@@ -70,13 +99,34 @@ const Notifications = () => {
           </ScrollView>
         </>
       ) : (
-        <Text style={styles.noNotificationsText}>You have no notifications</Text>
+        <View style={styles.centered}>
+          <Text style={styles.noNotificationsText}>
+            No tienes notificaciones
+          </Text>
+          <Image
+            source={require("../../../assets/images/errorRobot.png")}
+            style={styles.errorImage}
+          />
+        </View>
       )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  noNotificationsText: {
+    color: "gray",
+    fontSize: 16,
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  centered: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 10,
+  },
+  errorImage: { height: 200, width: 200 },
   container: {
     flex: 1,
   },
@@ -99,7 +149,6 @@ const styles = StyleSheet.create({
   },
   tabs: {
     flexDirection: "row",
-    padding: 8,
   },
   tab: {
     flex: 1,
@@ -121,12 +170,6 @@ const styles = StyleSheet.create({
   },
   notificationsContainer: {
     flex: 1,
-  },
-  noNotificationsText: {
-    color: "gray",
-    fontSize: 16,
-    textAlign: "center",
-    marginTop: 20,
   },
 });
 

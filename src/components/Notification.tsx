@@ -12,19 +12,19 @@ interface NotificationProps {
 const Notification: React.FC<NotificationProps> = ({
   title,
   body,
-  isRead,
+  // isRead,
   showButtons,
 }) => {
   return (
-    <View  style={[styles.container, isRead ? null : styles.unreadContainer]}>
+    <View style={[styles.container]}>
       {/* !isRead && <View style={styles.unreadIndicator}></View> */}
       <Image
         source={require("../../assets/images/placeholder.jpg")}
         style={styles.image}
       />
       <View style={styles.textContainer}>
-        <Text style={{ fontWeight: "bold" }}>{title}</Text>
-        <Text>{body}</Text>
+        <Text style={styles.notificationTitle}>{title}</Text>
+        <Text style={styles.notificationBody}>{body}</Text>
         {showButtons && (
           <View style={styles.buttons}>
             <NotificationButtons />
@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     padding: 20,
-    marginHorizontal: 0,
     borderTopWidth: 1,
     borderColor: "#292929",
   },
@@ -53,6 +52,7 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 1,
+    marginLeft: 5,
   },
   unreadContainer: {
     backgroundColor: "rgba(54, 115, 245, 0.3)",
@@ -76,11 +76,12 @@ const styles = StyleSheet.create({
     top: "50%",
     marginTop: 5,
   },
-  normalText: {
-    fontWeight: "normal",
+  notificationTitle: {
+    fontFamily: "PoppinsSemiBold",
   },
-  boldText: {
-    fontWeight: "bold",
+  notificationBody: {
+    fontFamily: "Poppins",
+    color: "#bdbdbd"
   },
 });
 
