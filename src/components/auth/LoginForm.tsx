@@ -1,21 +1,38 @@
 import { useSession } from "@/src/context/ctx";
 import React, { useState } from "react";
-import { View, TextInput, TouchableOpacity, Text, StyleSheet, Image } from "react-native";
+import {
+  View,
+  TextInput,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  Image,
+  ActivityIndicator,
+} from "react-native";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const { signIn } = useSession();
+  const { signIn, loading } = useSession();
 
   return (
     <View style={styles.container}>
       <View style={styles.curveShape}>
-        <Image source={require("../../../assets/images/intecrobots_dark.png")} style={styles.logo} />
+        <Image
+          source={require("../../../assets/images/intecrobots_dark.png")}
+          style={styles.logo}
+        />
       </View>
       <View style={styles.loginCard}>
         <Text style={styles.loginTitle}>Iniciar sesión</Text>
-        <TextInput placeholderTextColor="black" placeholder="Nombre de usuario..." value={username} onChangeText={setUsername} style={styles.input} />
+        <TextInput
+          placeholderTextColor="black"
+          placeholder="Nombre de usuario..."
+          value={username}
+          onChangeText={setUsername}
+          style={styles.input}
+        />
         <TextInput
           placeholderTextColor="black"
           placeholder="Contraseña..."
@@ -24,11 +41,21 @@ const LoginForm = () => {
           secureTextEntry={true}
           style={styles.input}
         />
-        <TouchableOpacity onPress={() => signIn(username, password)} style={styles.button}>
-          <Text style={styles.buttonText}>Iniciar sesión</Text>
+        <TouchableOpacity
+          onPress={() => signIn(username, password)}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>
+            {loading ? (
+              <ActivityIndicator color={"white"} size={25} />
+            ) : (
+              "Iniciar sesión"
+            )}
+          </Text>
         </TouchableOpacity>
         <Text style={styles.signupText}>
-          ¿No estás registrado? <Text style={styles.signupLink}>Contacta con nosotros</Text>
+          ¿No tienes cuenta?{" "}
+          <Text style={styles.signupLink}>Contacta con nosotros</Text>
         </Text>
       </View>
       <Text style={styles.footerText}>© 2024 Intec Robots.</Text>
@@ -76,7 +103,7 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     marginBottom: 20,
     textAlign: "center",
-    fontFamily: 'PoppinsBold'
+    fontFamily: "PoppinsBold",
   },
   input: {
     backgroundColor: "#E8EAF6",
@@ -84,7 +111,7 @@ const styles = StyleSheet.create({
     height: 50,
     marginBottom: 15,
     borderRadius: 5,
-    fontFamily: 'Poppins',
+    fontFamily: "Poppins",
     paddingHorizontal: 10,
     fontSize: 16,
   },
@@ -98,13 +125,13 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#ffffff",
     fontSize: 16,
-    fontFamily: 'PoppinsBold'
+    fontFamily: "PoppinsBold",
   },
   signupText: {
     marginTop: 20,
     color: "#ffffff",
     textAlign: "center",
-    fontFamily: 'Poppins'
+    fontFamily: "Poppins",
   },
   signupLink: {
     color: "#3673F5",
@@ -113,7 +140,7 @@ const styles = StyleSheet.create({
   footerText: {
     marginTop: 15,
     color: "#7d7d7d",
-    fontFamily: 'PoppinsBold'
+    fontFamily: "PoppinsBold",
   },
 });
 

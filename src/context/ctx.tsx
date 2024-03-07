@@ -1,22 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useStorageState } from "../hooks/useStorageState";
 import { router } from "expo-router";
-
-interface LoginResponse {
-  token: string;
-  message: string;
-}
 
 const AuthContext = React.createContext<{
   signIn: (username: string, password: string) => Promise<void>;
   signOut: () => void;
   session?: string | null;
-  isLoading: boolean;
+  loading: boolean;
 }>({
   signIn: async (username, password) => {},
   signOut: () => null,
   session: null,
-  isLoading: false,
+  loading: false,
 });
 
 export function useSession() {
@@ -32,32 +27,40 @@ export function useSession() {
 
 export function SessionProvider(props: React.PropsWithChildren) {
   const [[isLoading, session], setSession] = useStorageState("session");
+  const [loading, setLoading] = useState<boolean>(false);
 
   return (
     <AuthContext.Provider
       value={{
         signIn: async (username: string, password: string) => {
           try {
-            const response = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/auth/login`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                username: username,
-                password: password,
-              }),
-            });
+            setLoading(true);
+            const response = await fetch(
+              `${process.env.EXPO_PUBLIC_API_URL}/auth/login`,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  username: username,
+                  password: password,
+                }),
+              }
+            );
 
             const json: any = await response.json();
             console.log(json);
             if (response.status === 200) {
               setSession(json.token);
+              setLoading(false);
               router.replace("/(tabs)");
             } else {
+              setLoading(false);
               console.error(response.status);
             }
           } catch (error) {
+            setLoading(false);
             console.error(error);
           }
         },
@@ -66,7 +69,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
           setSession(null);
         },
         session,
-        isLoading,
+        loading,
       }}
     >
       {props.children}
