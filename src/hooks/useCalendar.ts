@@ -1,51 +1,52 @@
-import { useState, useEffect } from "react";
-import { GoogleSignin } from "@react-native-google-signin/google-signin";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useCallback, useEffect, useState } from "react";
 
 const useCalendar = () => {
-  const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [events, setEvents] = useState<any>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<any>(null);
 
-  const fetchCalendarEvents = async (accessToken: any) => {
+  const refetch = useCallback(async () => {
+    console.log("Refetch iniciado - setLoading a true");
+    setLoading(true);
+    setError(null);
+
     try {
-      console.log("Solicitando eventos del calendario...");
+      console.log("Obteniendo token de acceso...");
+      const accessToken = await AsyncStorage.getItem("accestoken");
+      console.log(`Token obtenido: ${accessToken}`);
+
+      console.log("Haciendo petición a la API de calendario...");
       const response = await fetch("https://www.googleapis.com/calendar/v3/calendars/primary/events", {
+        method: "GET",
         headers: {
           Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
         },
       });
 
       if (!response.ok) {
-        setError("Error en la solicitud a la API del calendario");
+        throw new Error(`Network response was not ok: ${response.statusText}`);
       }
 
       const data = await response.json();
+      console.log("Datos recibidos de la API");
       setEvents(data.items);
-      console.log("Eventos del calendario recibidos");
-    } catch (error) {
-      console.error("Error al solicitar los eventos del calendario:", error);
-      setError("Error en la solicitud a la API del calendario");
+    } catch (err) {
+      console.error("Error en refetch", err);
+      setError(err);
     } finally {
+      console.log("Refetch finalizado - setLoading a false");
       setLoading(false);
     }
-  };
-
-  useEffect(() => {
-    const getAccessTokenAndFetchEvents = async () => {
-      try {
-        console.log("Obteniendo token...");
-        const tokens = await GoogleSignin.getTokens();
-        await fetchCalendarEvents(tokens.accessToken);
-      } catch (error: any) {
-        setError("Inicia sesión con Google para ver tus eventos de Calendar");
-        setLoading(false);
-      }
-    };
-
-    getAccessTokenAndFetchEvents();
   }, []);
 
-  return { events, loading, error };
+  useEffect(() => {
+    console.log("Ejecutando refetch desde useEffect");
+    refetch();
+  }, [refetch]);
+
+  return { events, loading, error, refetch };
 };
 
 export default useCalendar;

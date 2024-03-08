@@ -6,11 +6,13 @@ const AuthContext = React.createContext<{
   signIn: (username: string, password: string) => Promise<void>;
   signOut: () => void;
   session?: string | null;
+  isLoading: boolean;
   loading: boolean;
 }>({
   signIn: async (username, password) => {},
   signOut: () => null,
   session: null,
+  isLoading: false,
   loading: false,
 });
 
@@ -35,19 +37,16 @@ export function SessionProvider(props: React.PropsWithChildren) {
         signIn: async (username: string, password: string) => {
           try {
             setLoading(true);
-            const response = await fetch(
-              `${process.env.EXPO_PUBLIC_API_URL}/auth/login`,
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  username: username,
-                  password: password,
-                }),
-              }
-            );
+            const response = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/auth/login`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                username: username,
+                password: password,
+              }),
+            });
 
             const json: any = await response.json();
             console.log(json);
@@ -69,6 +68,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
           setSession(null);
         },
         session,
+        isLoading,
         loading,
       }}
     >

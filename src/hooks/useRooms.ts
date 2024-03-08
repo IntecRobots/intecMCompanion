@@ -7,7 +7,6 @@ const useRooms = (url: string) => {
   const [error, setError] = useState<any>(null);
   const { session } = useSession();
 
-  // The refetch function is using useCallback to avoid unnecessary re-creations
   const refetch = useCallback(async () => {
     setIsLoading(true);
     setError(null);
