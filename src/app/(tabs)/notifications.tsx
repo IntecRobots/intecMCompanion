@@ -1,17 +1,9 @@
-import React, { useCallback, useEffect, useState } from "react";
-import {
-  ScrollView,
-  View,
-  Text,
-  Pressable,
-  StyleSheet,
-  Image,
-  Button,
-  ActivityIndicator,
-} from "react-native";
+import React, { useCallback, useState } from "react";
+import { ScrollView, View, Text, Pressable, StyleSheet, Image, ActivityIndicator } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Notification from "@/src/components/Notification";
+import Notification from "@/src/components/notifications/Notification";
 import { useFocusEffect } from "expo-router";
+import NotificationTabs from "@/src/components/notifications/NotificationTabs";
 
 const Notifications = () => {
   const [activeTab, setActiveTab] = useState("unread");
@@ -27,12 +19,6 @@ const Notifications = () => {
     setIsLoading(false);
   };
 
-  useFocusEffect(
-    useCallback(() => {
-      loadNotifications();
-    }, [])
-  );
-
   const clearNotifications = async () => {
     try {
       await AsyncStorage.removeItem("@notifications");
@@ -42,6 +28,12 @@ const Notifications = () => {
       console.error("Error clearing notifications:", error);
     }
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      loadNotifications();
+    }, [])
+  );
 
   if (isLoading) {
     return (
@@ -53,38 +45,11 @@ const Notifications = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.tabs}>
-        <Pressable
-          onPress={() => setActiveTab("unread")}
-          style={[styles.tab, activeTab === "unread" && styles.activeTab]}
-        >
-          <Text
-            style={[
-              styles.tabText,
-              activeTab === "unread" && styles.activeTabText,
-            ]}
-          >
-            No leídas
-          </Text>
-        </Pressable>
-        <Pressable
-          onPress={() => setActiveTab("all")}
-          style={[styles.tab, activeTab === "all" && styles.activeTab]}
-        >
-          <Text
-            style={[
-              styles.tabText,
-              activeTab === "all" && styles.activeTabText,
-            ]}
-          >
-            Todas
-          </Text>
-        </Pressable>
-      </View>
+      <NotificationTabs activeTab={activeTab} setActiveTab={setActiveTab} />
       {notifications.length ? (
         <>
           <Pressable onPress={() => clearNotifications()}>
-            <Text style={styles.clearText}>Clear notifications</Text>
+            <Text style={styles.clearText}>Borrar notificaciones</Text>
           </Pressable>
           <ScrollView style={styles.notificationsContainer}>
             {notifications.reverse().map((notification: any, k: number) => (
@@ -100,13 +65,8 @@ const Notifications = () => {
         </>
       ) : (
         <View style={styles.centered}>
-          <Text style={styles.noNotificationsText}>
-            No tienes notificaciones
-          </Text>
-          <Image
-            source={require("../../../assets/images/errorRobot.png")}
-            style={styles.errorImage}
-          />
+          <Text style={styles.noNotificationsText}>No tienes notificaciones</Text>
+          <Image source={require("../../../assets/images/errorRobot.png")} style={styles.errorImage} />
         </View>
       )}
     </View>
@@ -146,27 +106,6 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 20,
     marginLeft: 16,
-  },
-  tabs: {
-    flexDirection: "row",
-  },
-  tab: {
-    flex: 1,
-    alignItems: "center",
-    padding: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: "#292929",
-  },
-  activeTab: {
-    borderBottomWidth: 3,
-    borderBottomColor: "#3673F5",
-  },
-  activeTabText: {
-    color: "#3673F5",
-  },
-  tabText: {
-    color: "white",
-    fontSize: 16,
   },
   notificationsContainer: {
     flex: 1,

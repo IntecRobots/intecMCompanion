@@ -1,5 +1,5 @@
 import { StyleSheet, View, Image } from "react-native";
-import { Text } from "./Themed";
+import { Text } from "../Themed";
 import NotificationButtons from "./NotificationButtons";
 
 interface NotificationProps {
@@ -19,7 +19,7 @@ const Notification: React.FC<NotificationProps> = ({
     <View style={[styles.container]}>
       {/* !isRead && <View style={styles.unreadIndicator}></View> */}
       <Image
-        source={require("../../assets/images/placeholder.jpg")}
+        source={require("../../../assets/images/placeholder.jpg")}
         style={styles.image}
       />
       <View style={styles.textContainer}>

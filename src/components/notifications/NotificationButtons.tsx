@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet } from "react-native";
-import { Text } from "./Themed";
+import { Text } from "../Themed";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 function NotificationButtonIcon(props: { name: React.ComponentProps<typeof FontAwesome>["name"]; color: string }) {

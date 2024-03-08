@@ -4,12 +4,11 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect, useRef, useState } from "react";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { useColorScheme } from "@/src/hooks/useColorScheme";
 import { SessionProvider } from "@/src/context/ctx";
-import { Platform, Pressable, Text } from "react-native";
+import { Platform } from "react-native";
 
 import * as Notifications from "expo-notifications";
 import * as Device from "expo-device";
@@ -33,56 +32,18 @@ Notifications.setNotificationHandler({
 
 const storeNotification = async (notification: any) => {
   try {
-    const savedNotifications = await AsyncStorage.getItem('@notifications');
+    const savedNotifications = await AsyncStorage.getItem("@notifications");
     const existingNotifications = savedNotifications ? JSON.parse(savedNotifications) : [];
-    
+
     const newNotification = { ...notification, isRead: false };
     console.log(newNotification);
     const updatedNotifications = [...existingNotifications, newNotification];
 
-    await AsyncStorage.setItem('@notifications', JSON.stringify(updatedNotifications));
+    await AsyncStorage.setItem("@notifications", JSON.stringify(updatedNotifications));
   } catch (error) {
-    console.error('Error saving notification:', error);
+    console.error("Error saving notification:", error);
   }
 };
-
-
-
-async function sendPushNotification(expoPushToken: any) {
-  const message = {
-    to: expoPushToken.data,
-    sound: "default",
-    title: "Original Title",
-    body: "And here is the body!",
-    data: { someData: "goes here" },
-  };
-
-  try {
-    console.log("Sending push notification:", message);
-
-    const response = await fetch("https://exp.host/--/api/v2/push/send", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Accept-encoding": "gzip, deflate",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(message),
-    });
-
-    const responseData = await response.json();
-    console.log("Response from push notification server:", responseData);
-
-    // Check if the response status is not OK
-    if (!response.ok) {
-      console.error("Push notification sending failed:", responseData);
-    } else {
-      console.log("Push notification sent successfully!");
-    }
-  } catch (error) {
-    console.error("Error sending push notification:", error);
-  }
-}
 
 async function registerForPushNotificationsAsync() {
   let token;
@@ -114,7 +75,7 @@ async function registerForPushNotificationsAsync() {
   } else {
     alert("Must use physical device for Push Notifications");
   }
-  await AsyncStorage.setItem('pushtoken', JSON.stringify(token));
+  await AsyncStorage.setItem("pushtoken", JSON.stringify(token));
   return token;
 }
 
@@ -162,22 +123,15 @@ export default function RootLayout() {
     return null;
   }
 
-  return (
-    <RootLayoutNav>
-      <Pressable onPress={() => sendPushNotification(expoPushToken)}>
-        <Text>dsada</Text>
-      </Pressable>
-    </RootLayoutNav>
-  );
+  return <RootLayoutNav />;
 }
 
-function RootLayoutNav(props: React.PropsWithChildren) {
+function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
     <SessionProvider>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        {/* props.children */}
         <Stack initialRouteName="index">
           <Stack.Screen name="index" options={{ headerShown: false }} />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
