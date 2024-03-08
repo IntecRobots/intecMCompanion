@@ -31,7 +31,7 @@ const CalendarEvents = () => {
   }
   return (
     <>
-      <Text style={styles.titleText}>Próximos eventos</Text>
+      <Text style={styles.titleText}>Últimos eventos</Text>
       <View style={styles.summaryContainer}>
         {!error ? (
           events.slice(-4).map((event: any, index: number) => (

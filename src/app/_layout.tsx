@@ -13,6 +13,7 @@ import { Platform } from "react-native";
 import * as Notifications from "expo-notifications";
 import * as Device from "expo-device";
 import Constants from "expo-constants";
+import { refreshAccessToken } from "../utils/refreshAccesToken";
 
 export { ErrorBoundary } from "expo-router";
 
@@ -91,6 +92,11 @@ export default function RootLayout() {
   const [expoPushToken, setExpoPushToken] = useState<any>("");
   const notificationListener = useRef<any>();
   const responseListener = useRef<any>();
+
+  //temporary fix to refresh access token when app is loaded
+  useEffect(() => {
+    refreshAccessToken();
+  }, []);
 
   useEffect(() => {
     registerForPushNotificationsAsync().then((token) => setExpoPushToken(token));
