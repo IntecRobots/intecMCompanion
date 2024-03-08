@@ -1,13 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  ScrollView,
-  View,
-  Text,
-  Pressable,
-  StyleSheet,
-  ActivityIndicator,
-  Image,
-} from "react-native";
+import { ScrollView, View, Text, Pressable, StyleSheet, ActivityIndicator, Image } from "react-native";
 import VisitCard from "@/src/components/VisitCard";
 import { useIsFocused } from "@react-navigation/native";
 import useVisits from "@/src/hooks/useVisits";
@@ -15,9 +7,7 @@ import useVisits from "@/src/hooks/useVisits";
 const Visitas = () => {
   const [activeTab, setActiveTab] = useState("upcoming");
   const isFocused = useIsFocused();
-  const { visits, isLoading, error, refetch } = useVisits(
-    `${process.env.EXPO_PUBLIC_API_URL}/visitas`
-  );
+  const { visits, isLoading, error, refetch } = useVisits(`${process.env.EXPO_PUBLIC_API_URL}/visitas`);
 
   const filterUpcomingVisits = (visits: any) => {
     if (!visits || !Array.isArray(visits.records)) {
@@ -31,10 +21,7 @@ const Visitas = () => {
     });
   };
 
-  const displayedVisits =
-    activeTab === "upcoming"
-      ? filterUpcomingVisits(visits.records)
-      : visits.records;
+  const displayedVisits = activeTab === "upcoming" ? filterUpcomingVisits(visits.records) : visits.records;
 
   useEffect(() => {
     if (isFocused) {
@@ -53,9 +40,7 @@ const Visitas = () => {
   if (error) {
     return (
       <View style={styles.centered}>
-        <Text style={{ color: "white" }}>
-          Error al cargar las visitas: {error}
-        </Text>
+        <Text style={{ color: "white" }}>Error al cargar las visitas: {error}</Text>
       </View>
     );
   }
@@ -63,31 +48,11 @@ const Visitas = () => {
   return (
     <View style={styles.container}>
       <View style={styles.tabs}>
-        <Pressable
-          onPress={() => setActiveTab("upcoming")}
-          style={[styles.tab, activeTab === "upcoming" && styles.activeTab]}
-        >
-          <Text
-            style={[
-              styles.tabText,
-              activeTab === "upcoming" && styles.activeTabText,
-            ]}
-          >
-            Visitas próximas
-          </Text>
+        <Pressable onPress={() => setActiveTab("upcoming")} style={[styles.tab, activeTab === "upcoming" && styles.activeTab]}>
+          <Text style={[styles.tabText, activeTab === "upcoming" && styles.activeTabText]}>Visitas próximas</Text>
         </Pressable>
-        <Pressable
-          onPress={() => setActiveTab("all")}
-          style={[styles.tab, activeTab === "all" && styles.activeTab]}
-        >
-          <Text
-            style={[
-              styles.tabText,
-              activeTab === "all" && styles.activeTabText,
-            ]}
-          >
-            Todas las visitas
-          </Text>
+        <Pressable onPress={() => setActiveTab("all")} style={[styles.tab, activeTab === "all" && styles.activeTab]}>
+          <Text style={[styles.tabText, activeTab === "all" && styles.activeTabText]}>Todas las visitas</Text>
         </Pressable>
       </View>
       <ScrollView style={styles.notificationsContainer}>
@@ -104,13 +69,8 @@ const Visitas = () => {
           ))
         ) : (
           <View style={styles.centered}>
-            <Text style={styles.noVisitsText}>
-              No tienes visitas programadas
-            </Text>
-            <Image
-              source={require("../../../assets/images/errorRobot.png")}
-              style={styles.errorImage}
-            />
+            <Text style={styles.noVisitsText}>No tienes visitas programadas</Text>
+            <Image source={require("../../../assets/images/errorRobot.png")} style={styles.errorImage} />
           </View>
         )}
       </ScrollView>

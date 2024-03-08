@@ -4,7 +4,7 @@
     "slug": "intecMCompanion",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/intecrobots.png",
+    "icon": "./assets/images/RobotLogoBig.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
@@ -22,7 +22,7 @@
     "android": {
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/RobotLogoBig.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.fnv457.intecMCompanion"

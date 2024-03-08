@@ -23,7 +23,7 @@ const CalendarEvents = () => {
 
   if (loading) {
     return (
-      <View style={styles.centered}>
+      <View style={{ marginTop: 120 }}>
         <ActivityIndicator size={80} color="#3673F5" />
         <Text style={styles.loadingText}>Cargando eventos de Calendar...</Text>
       </View>
@@ -33,7 +33,7 @@ const CalendarEvents = () => {
     <>
       <Text style={styles.titleText}>Últimos eventos</Text>
       <View style={styles.summaryContainer}>
-        {!error ? (
+        {!error && events ? (
           events.slice(-4).map((event: any, index: number) => (
             <View key={index} style={styles.summaryBoxWrapper}>
               <View style={styles.summaryBox}>
@@ -57,11 +57,11 @@ const CalendarEvents = () => {
 };
 
 const styles = StyleSheet.create({
-  loadingText: { color: "white", fontFamily: "Poppins", marginTop: 25, fontSize: 12 },
+  loadingText: { color: "white", fontFamily: "Poppins", marginTop: 25, fontSize: 12, textAlign: "center" },
   errorImage: { height: 200, width: 200 },
   error: { marginBottom: 30, color: "white", marginTop: 10 },
   centered: {
-    marginTop: 120,
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
