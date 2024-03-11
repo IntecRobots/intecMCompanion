@@ -77,6 +77,3 @@ const styles = StyleSheet.create({
 });
 
 export default Room;
-function useRoomUpdater(): { isUpdating: any; updateRoomState: any } {
-  throw new Error("Function not implemented.");
-}

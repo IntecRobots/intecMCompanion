@@ -22,14 +22,16 @@ export default function ModalScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sesión iniciada</Text>
+      <Text style={styles.title}>Url del backend</Text>
       <Text style={styles.title}>{process.env.EXPO_PUBLIC_API_URL}</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <Text style={styles.title}>Sesión</Text>
+      <View style={styles.separator} lightColor="#eee" darkColor="#292929" />
+      <Text style={styles.title}>Token inicio de sesión</Text>
       <Text style={styles.body}>{session}</Text>
-      <Text style={styles.title}>PushToken</Text>
+      <View style={styles.separator} lightColor="#eee" darkColor="#292929" />
+      <Text style={styles.title}>Expo PushToken</Text>
       <Text style={styles.body}>{token}</Text>
-      <Text style={styles.title}>GToken</Text>
+      <View style={styles.separator} lightColor="#eee" darkColor="#292929" />
+      <Text style={styles.title}>Token de google</Text>
       <Text style={styles.body}>{googleToken}</Text>
     </View>
   );

@@ -9,7 +9,7 @@ interface NotificationProps {
   showButtons: boolean;
 }
 
-const Notification: React.FC<NotificationProps> = ({
+const NotificationCard: React.FC<NotificationProps> = ({
   title,
   body,
   // isRead,
@@ -85,4 +85,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Notification;
+export default NotificationCard;

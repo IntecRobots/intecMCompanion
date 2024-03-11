@@ -1,15 +1,8 @@
 import React from "react";
 import { View, Text, Image, StyleSheet } from "react-native"; // Importa Image y StyleSheet
+import { Visit } from "../types/types";
 
-interface VisitCardProps {
-  title: string;
-  description: string;
-  room: string;
-  startDate: string;
-  startTime: string;
-}
-
-const VisitCard: React.FC<VisitCardProps> = ({
+const VisitCard: React.FC<Visit> = ({
   title,
   description,
   room,
