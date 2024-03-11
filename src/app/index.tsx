@@ -4,7 +4,7 @@ import LoginForm from "@/src/components/auth/LoginForm";
 import { Redirect } from "expo-router";
 import { useSession } from "@/src/context/ctx";
 
-const Home = () => {
+const Home: React.FC = () => {
   const { session, isLoading } = useSession();
 
   if (isLoading) {

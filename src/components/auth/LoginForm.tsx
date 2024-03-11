@@ -17,7 +17,7 @@ const LoginForm = () => {
   const { signIn, loading } = useSession();
 
   return (
-    <View style={styles.container}>
+    <View testID="login-form" style={styles.container}>
       <View style={styles.curveShape}>
         <Image
           source={require("../../../assets/images/intecrobots_dark.png")}
