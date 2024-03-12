@@ -1,7 +1,5 @@
 import { useSession } from "@/src/context/ctx";
 import { Switch, Text, View, StyleSheet, TouchableOpacity } from "react-native";
-import { GoogleSignin, GoogleSigninButton, statusCodes } from "@react-native-google-signin/google-signin";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import GoogleButton from "@/src/components/GoogleButton";
 
 const Settings = () => {
