@@ -11,6 +11,7 @@ import { SessionProvider } from "@/src/context/ctx";
 import * as Notifications from "expo-notifications";
 import { refreshAccessToken } from "../utils/refreshAccesToken";
 import useNotifications from "../hooks/useNotifications";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 export { ErrorBoundary } from "expo-router";
 
@@ -26,6 +27,11 @@ Notifications.setNotificationHandler({
     shouldPlaySound: true,
     shouldSetBadge: false,
   }),
+});
+
+GoogleSignin.configure({
+  webClientId: "846381216746-2kl8npfsnbrmti0oaalcpuq8k13rtbn0.apps.googleusercontent.com",
+  scopes: ["https://www.googleapis.com/auth/calendar"],
 });
 
 export default function RootLayout() {
