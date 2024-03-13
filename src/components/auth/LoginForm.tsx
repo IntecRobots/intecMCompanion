@@ -11,8 +11,8 @@ import {
 } from "react-native";
 
 const LoginForm = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   const { signIn, loading } = useSession();
 
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
   footerText: {
     marginTop: 15,
     color: "#7d7d7d",
-    fontFamily: "PoppinsBold",
+    fontFamily: "PoppinsSemiBold",
   },
 });
 

@@ -21,7 +21,7 @@ const Visitas: React.FC = () => {
   }, [isFocused, refetch]);
 
   if (isLoading) {
-    return <ScreenLoadingSpinner size={110} />;
+    return <ScreenLoadingSpinner message="Cargando tus visitas..." size={110} />;
   }
 
   if (error) {

@@ -29,7 +29,7 @@ const Notifications: React.FC = () => {
   );
 
   if (isLoading) {
-    return <ScreenLoadingSpinner size={110} />;
+    return <ScreenLoadingSpinner message="Cargando tus notificaciones..." size={110} />;
   }
 
   return (

@@ -5,6 +5,7 @@ import { Text } from "@/src/components/Themed";
 import useRooms from "@/src/hooks/useRooms";
 import { useIsFocused } from "@react-navigation/native";
 import { FontAwesome5 } from "@expo/vector-icons";
+import ScreenLoadingSpinner from "@/src/components/ScreenLoadingSpinner";
 
 const Rooms = () => {
   const isFocused = useIsFocused();
@@ -19,9 +20,7 @@ const Rooms = () => {
 
   if (isLoading) {
     return (
-      <View style={styles.centered}>
-        <ActivityIndicator size={110} color="#3673F5" />
-      </View>
+      <ScreenLoadingSpinner size={110} message="Cargando todas las salas..." />
     );
   }
 
