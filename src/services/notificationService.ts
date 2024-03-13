@@ -81,9 +81,10 @@ export const registerForPushNotificationsAsync = async () => {
       projectId: Constants?.expoConfig?.extra?.eas.projectId,
     });
     console.log(token);
+    
   } else {
     alert("Must use physical device for Push Notifications");
   }
-  await AsyncStorage.setItem("pushtoken", JSON.stringify(token));
+  await AsyncStorage.setItem("pushtoken", JSON.stringify(token?.data));
   return token;
 };

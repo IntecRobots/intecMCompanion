@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useStorageState } from "../hooks/useStorageState";
 import { router } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { sendPushToken } from "../utils/sendPushToken";
 
 const AuthContext = React.createContext<{
   signIn: (username: string, password: string) => Promise<void>;
@@ -36,6 +38,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
       value={{
         signIn: async (username: string, password: string) => {
           try {
+            const pushToken = await AsyncStorage.getItem("pushtoken");
             setLoading(true);
             const response = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/auth/login`, {
               method: "POST",
@@ -51,6 +54,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
             const json: any = await response.json();
             console.log(json);
             if (response.status === 200) {
+              await sendPushToken(pushToken as string, json.token, json.user_id);
               setSession(json.token);
               setLoading(false);
               router.replace("/(tabs)");
