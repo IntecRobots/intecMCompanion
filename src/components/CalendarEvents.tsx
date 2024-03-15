@@ -2,6 +2,7 @@ import { Image, Text, View, StyleSheet, ActivityIndicator } from "react-native";
 import useCalendar from "../hooks/useCalendar";
 import { useIsFocused } from "@react-navigation/native";
 import { useEffect } from "react";
+import { transformEvents } from "../utils/buildAndSendEvents";
 
 const CalendarEvents = () => {
   const { events, loading, error, refetch } = useCalendar();
@@ -50,6 +51,13 @@ const CalendarEvents = () => {
             <Text style={styles.error}>{error ? error : "Inicia sesión con Google para ver tus eventos de Calendar."}</Text>
             <Image source={require("../../assets/images/errorRobot.png")} style={styles.errorImage} />
           </View>
+        )}
+        {events ? (
+          <Text selectable={true} style={{ color: "white" }}>
+            {JSON.stringify(transformEvents(events), null, 2)}
+          </Text>
+        ) : (
+          <Text>Hola</Text>
         )}
       </View>
     </>
