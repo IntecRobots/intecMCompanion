@@ -22,7 +22,7 @@ const useCalendar = () => {
         },
       });
       const data = await response.json();
-      // console.log("Datos recibidos de la API");
+  
       setEvents(data.items);
     } catch (err: any) {
       console.error("Error en refetch", err);
