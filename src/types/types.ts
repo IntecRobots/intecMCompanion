@@ -14,7 +14,7 @@ export type Notification = {
 };
 
 export type GoogleEvent = {
-  anfitrion: string;
+  anfitrion: number;
   description: string | null;
   id: string;
   location: string;
