@@ -12,8 +12,10 @@ const Visitas: React.FC = () => {
   const { visits, isLoading, error, refetch } = useVisits(`${process.env.EXPO_PUBLIC_API_URL}/visitas`);
   const isFocused = useIsFocused();
 
-  const displayedVisits = activeTab === "upcoming" ? filterUpcomingVisits(visits.records) : visits.records;
+  const displayedVisits = activeTab === "upcoming" ? filterUpcomingVisits(visits) : visits.records;
 
+
+  
   useEffect(() => {
     if (isFocused) {
       refetch();
