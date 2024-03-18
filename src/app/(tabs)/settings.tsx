@@ -1,33 +1,42 @@
 import { useSession } from "@/src/context/ctx";
 import { Switch, Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import GoogleButton from "@/src/components/GoogleButton";
+import StyleOptionSetting from "@/src/components/StyleOptionSetting";
+import SettingsHead from "@/src/components/settings/SettingsHead";
+import { useState } from "react";
+
+
+
+
 
 const Settings = () => {
   const { signOut } = useSession();
+  const [darkMode, setDarkMode] = useState<boolean>(false);
 
+
+  //Controlar variable de darMode de forma global
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.option} onPress={() => {}}>
-        <Text style={styles.optionText}>Opciones app</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.option} onPress={() => {}}>
-        <Text style={styles.optionText}>Opciones robot</Text>
-      </TouchableOpacity>
+      
+      <SettingsHead 
+        mode={darkMode}
+      />
 
       <View style={styles.option}>
-        <Text style={styles.optionText}>Modo experto</Text>
+        <Text style={styles.optionTextLight}>Modo experto</Text>
         <Switch value={true} />
       </View>
 
       <View style={styles.option}>
-        <Text style={styles.optionText}>Modo oscuro</Text>
-        <Switch />
+        <Text style={styles.optionTextLight}>Modo oscuro</Text>
+        <Switch 
+          onValueChange={() => setDarkMode(!darkMode)}
+          value={darkMode}
+        />
       </View>
       <GoogleButton />
-      <TouchableOpacity style={styles.button} onPress={() => signOut()}>
-        <Text style={styles.buttonText}>Cerrar sesión</Text>
-      </TouchableOpacity>
+
+      <StyleOptionSetting text="Cerrar sesión" onPress={() => signOut()} isDarkMode={darkMode} stylesBoton={styles.button} stylesText={styles.buttonText}/>
 
       <Text style={styles.footerText}>© 2024 Intec Robots.</Text>
     </View>
@@ -37,11 +46,6 @@ const Settings = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  title: {
-    fontSize: 22,
-    fontWeight: "bold",
-    color: "white",
   },
   option: {
     paddingVertical: 15,
@@ -53,7 +57,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  optionText: {
+  optionTextLight: {
     fontSize: 15,
     fontFamily: "Poppins",
     color: "white",
