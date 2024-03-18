@@ -1,22 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, ScrollView, ActivityIndicator, TextInput } from "react-native";
-import Room from "@/src/components/Room";
+import { View, StyleSheet, ScrollView } from "react-native";
 import { Text } from "@/src/components/Themed";
 import useRooms from "@/src/hooks/useRooms";
 import { useIsFocused } from "@react-navigation/native";
-import { FontAwesome5 } from "@expo/vector-icons";
 import ScreenLoadingSpinner from "@/src/components/ScreenLoadingSpinner";
-import SearchRooms from "@/src/components/SearchRooms";
 import ResultRooms from "@/src/components/ResultRooms";
+import RoomSearchBar from "@/src/components/RoomSearchBar";
 
 const Rooms = () => {
   const isFocused = useIsFocused();
   const { rooms, isLoading, error, refetch } = useRooms(`${process.env.EXPO_PUBLIC_API_URL}/salas`);
   const [currentRooms, setCurrentRooms] = useState<any>(rooms);
- 
-
-console.log(currentRooms.length);
-
 
   useEffect(() => {
     if (isFocused) {
@@ -42,13 +36,12 @@ console.log(currentRooms.length);
 
   return (
     <ScrollView style={styles.container}>
-      <SearchRooms
-        rooms={rooms}
+      <RoomSearchBar
+        rooms={rooms.records}
         setRooms={setCurrentRooms}
       />
       <ResultRooms
-        rooms={rooms}
-        romsFilter={currentRooms}
+        rooms={currentRooms}
       />
     </ScrollView>
   );

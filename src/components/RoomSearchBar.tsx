@@ -1,7 +1,6 @@
 import React, { useState,Dispatch,SetStateAction, useEffect} from "react";
-import { View,TextInput,StyleSheet, TouchableOpacity,Text} from "react-native";
+import { View,TextInput,StyleSheet } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
-import useRooms from "../hooks/useRooms";
 
 interface SearchRoomsProps {
     rooms:any;
@@ -11,15 +10,24 @@ interface SearchRoomsProps {
 
 const SearchRooms:React.FC<SearchRoomsProps> = ({rooms,setRooms}) =>{
 
-    const ResultQuery = (query:string) => 
-    rooms?.records?.
-    filter((room:any, index:number) => room.sala.toLowerCase().includes(query.toLowerCase()));
+  const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    filterRooms();
+  }, [searchQuery, rooms]);
+
+  const filterRooms = () => {
+    const filtered = rooms.filter((room: any) => 
+      room.sala.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setRooms(filtered);
+  };
     
 
     return(
         <View style={styles.searchSection}>
             <FontAwesome5 name="search" size={20} color="#868A90" style={styles.searchIcon} />
-            <TextInput style={styles.input} onChangeText={(e) => setRooms(ResultQuery(e))}  placeholder="Buscar" placeholderTextColor="#868A90" />
+            <TextInput style={styles.input} onChangeText={text => setSearchQuery(text)}   placeholder="Buscar" placeholderTextColor="#868A90" />
         </View>
     );
 }
