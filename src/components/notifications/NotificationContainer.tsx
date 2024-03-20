@@ -8,6 +8,8 @@ interface NotificationContainerProps {
 }
 
 const NotificationContainer: React.FC<NotificationContainerProps> = ({ notifications }) => {
+  console.log(notifications);
+
   return (
     <ScrollView style={styles.notificationsContainer}>
       {notifications.length ? (
@@ -16,10 +18,10 @@ const NotificationContainer: React.FC<NotificationContainerProps> = ({ notificat
           .map((notification: any, k: number) => (
             <NotificationCard
               key={k}
-              body={notification?.request?.content?.body}
-              title={notification?.request?.content?.title}
-              isRead={notification.isRead}
-              showButtons={notification?.request?.content?.data?.showButtons}
+              body={notification?.data?.body}
+              title={notification?.data?.title}
+              // isRead={notification.isRead}
+              // showButtons={notification?.data?.content?.data?.showButtons}
             />
           ))
       ) : (
