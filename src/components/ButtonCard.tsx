@@ -6,14 +6,15 @@ interface ButtonCardProps {
   title: string;
   iconName: string;
   onPress: () => void;
+  disabled?: boolean;
 }
 
 const screenWidth = Dimensions.get("window").width;
 
-const ButtonCard: React.FC<ButtonCardProps> = ({ title, iconName, onPress }) => {
+const ButtonCard: React.FC<ButtonCardProps> = ({ title, iconName, onPress, disabled }) => {
   return (
-    <TouchableOpacity style={styles.card} onPress={onPress}>
-      <FontAwesome5 name={iconName} size={30} color="#3673F5" />
+    <TouchableOpacity style={[styles.card, { backgroundColor: `${disabled ? "#121212" : "#242424"}` }]} onPress={onPress}>
+      <FontAwesome5 name={iconName} size={30} color={`${disabled ? "#ababab" : "#3673F5"}`} />
       <Text style={styles.cardText}>{title}</Text>
     </TouchableOpacity>
   );
@@ -22,13 +23,12 @@ const ButtonCard: React.FC<ButtonCardProps> = ({ title, iconName, onPress }) => 
 const styles = StyleSheet.create({
   card: {
     width: screenWidth / 2 - 20,
-    backgroundColor: "#242424",
     borderRadius: 10,
     padding: 15,
     alignItems: "center",
     justifyContent: "center",
     margin: 10,
-    height: 120
+    height: 120,
   },
   cardText: {
     color: "white",
