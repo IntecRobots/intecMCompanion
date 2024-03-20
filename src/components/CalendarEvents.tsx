@@ -35,7 +35,7 @@ const CalendarEvents = () => {
       <Text style={styles.titleText}>Últimos eventos</Text>
       <View style={styles.summaryContainer}>
         {!error && events ? (
-          events.slice(-4).map((event: any, index: number) => (
+          events?.slice(-4)?.map((event: any, index: number) => (
             <View key={index} style={styles.summaryBoxWrapper}>
               <View style={styles.summaryBox}>
                 <Text style={styles.eventTitleText} numberOfLines={2} key={event.id}>
@@ -51,13 +51,6 @@ const CalendarEvents = () => {
             <Text style={styles.error}>{error ? error : "Inicia sesión con Google para ver tus eventos de Calendar."}</Text>
             <Image source={require("../../assets/images/errorRobot.png")} style={styles.errorImage} />
           </View>
-        )}
-        {events ? (
-          <Text selectable={true} style={{ color: "white" }}>
-            {JSON.stringify(transformEvents(events), null, 2)}
-          </Text>
-        ) : (
-          <Text>Hola</Text>
         )}
       </View>
     </>

@@ -1,10 +1,10 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { GoogleEvent, GoogleEventsResponse } from "../types/types";
 
-export const transformEvents = (events: any[]): GoogleEventsResponse => {
-
+export const transformEvents = (events: any[], userId: string): GoogleEventsResponse => {
   const googleEvents: GoogleEvent[] = events.map((event) => {
     return {
-      anfitrion: 1,
+      anfitrion: parseInt(userId as string),
       description: event.description,
       id: event.id,
       location: event.location,
@@ -30,7 +30,11 @@ export const transformEvents = (events: any[]): GoogleEventsResponse => {
 };
 
 export const postEvents = async (events: any[], sessionToken: string) => {
-  const transformedEvents = transformEvents(events);
+
+  if (!events) return
+
+  const userId = await AsyncStorage.getItem("userId");
+  const transformedEvents = transformEvents(events, userId as string);
 
   try {
     const response = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/visitas/addevent`, {
