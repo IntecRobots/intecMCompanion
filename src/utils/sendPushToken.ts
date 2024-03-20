@@ -24,7 +24,7 @@ export const sendPushToken = async (pushToken: string, sessionToken: string, use
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    console.log(JSON.stringify(response));
+    console.log(JSON.stringify(response, null, 2));
     console.log("Push token sent successfully");
   } catch (error) {
     console.error("Error sending push token:", error);
