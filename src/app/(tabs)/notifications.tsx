@@ -7,29 +7,45 @@ import NotificationContainer from "@/src/components/notifications/NotificationCo
 import { clearNotifications } from "@/src/utils/clearNotifications";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Notification } from "@/src/types/types";
+import useNotifications from "@/src/hooks/useNotifications";
+import useGetNotifications from "@/src/hooks/useGetNotifications";
 
 const Notifications: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("unread");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [notifications, setNotifications] = useState<Notification[]>([]);
 
-  const loadNotifications = async () => {
+  const { notifications, isLoading, error } = useGetNotifications();
+
+  //const [isLoading, setIsLoading] = useState<boolean>(false);
+  // const [notifications, setNotifications] = useState<Notification[]>([]);
+
+  /* const loadNotifications = async () => {
     setIsLoading(true);
     const storedNotifications = await AsyncStorage.getItem("@notifications");
     if (storedNotifications) {
       setNotifications(JSON.parse(storedNotifications));
     }
     setIsLoading(false);
-  };
+  }; */
 
   useFocusEffect(
     useCallback(() => {
-      loadNotifications();
+      // loadNotifications();
     }, [])
   );
 
   if (isLoading) {
-    return <ScreenLoadingSpinner message="Cargando tus notificaciones..." size={110} />;
+    return (
+      <ScreenLoadingSpinner size={110} message="Cargando todas tus notificaciones..." />
+    );
+  }
+
+
+  if (error) {
+    return (
+      <View style={styles.centered}>
+        <Text>Error al cargar tus notificaciones</Text>
+      </View>
+    );
   }
 
   return (
@@ -38,7 +54,7 @@ const Notifications: React.FC = () => {
       {notifications.length > 0 && (
         <Pressable
           onPress={() => {
-            setNotifications([]);
+            // setNotifications([]);
             clearNotifications();
           }}
         >
@@ -53,6 +69,14 @@ const Notifications: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  centered: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    borderTopWidth: 1,
+    borderColor: "#292929",
+    paddingVertical: 10
   },
 });
 
