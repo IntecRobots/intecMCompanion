@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useEffect, useState } from "react";
 import { postEvents } from "../utils/buildAndSendEvents";
 import { useSession } from "../context/ctx";
+import { getAccessToken } from "../utils/getAccessToken";
 
 const useCalendar = () => {
   const [events, setEvents] = useState<any>([]);
@@ -14,8 +15,9 @@ const useCalendar = () => {
     setError(null);
 
     try {
-      const accessToken = await AsyncStorage.getItem("accestoken");
-      // console.log(`Token obtenido: ${accessToken}`);
+      // const accessToken = await AsyncStorage.getItem("accestoken");
+      const accessToken = await getAccessToken();
+      console.log(`Token obtenido: ${accessToken}`);
 
       const response = await fetch("https://www.googleapis.com/calendar/v3/calendars/primary/events", {
         method: "GET",
