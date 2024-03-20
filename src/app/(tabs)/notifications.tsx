@@ -4,41 +4,21 @@ import { useFocusEffect } from "expo-router";
 import NotificationTabs from "@/src/components/notifications/NotificationTabs";
 import ScreenLoadingSpinner from "@/src/components/ScreenLoadingSpinner";
 import NotificationContainer from "@/src/components/notifications/NotificationContainer";
-import { clearNotifications } from "@/src/utils/clearNotifications";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Notification } from "@/src/types/types";
-import useNotifications from "@/src/hooks/useNotifications";
 import useGetNotifications from "@/src/hooks/useGetNotifications";
 
 const Notifications: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("unread");
-
-  const { notifications, isLoading, error } = useGetNotifications();
-
-  //const [isLoading, setIsLoading] = useState<boolean>(false);
-  // const [notifications, setNotifications] = useState<Notification[]>([]);
-
-  /* const loadNotifications = async () => {
-    setIsLoading(true);
-    const storedNotifications = await AsyncStorage.getItem("@notifications");
-    if (storedNotifications) {
-      setNotifications(JSON.parse(storedNotifications));
-    }
-    setIsLoading(false);
-  }; */
+  const { notifications, isLoading, error, refetch } = useGetNotifications();
 
   useFocusEffect(
     useCallback(() => {
-      // loadNotifications();
+      refetch();
     }, [])
   );
 
   if (isLoading) {
-    return (
-      <ScreenLoadingSpinner size={110} message="Cargando todas tus notificaciones..." />
-    );
+    return <ScreenLoadingSpinner size={110} message="Cargando todas tus notificaciones..." />;
   }
-
 
   if (error) {
     return (
@@ -54,8 +34,7 @@ const Notifications: React.FC = () => {
       {notifications.length > 0 && (
         <Pressable
           onPress={() => {
-            // setNotifications([]);
-            clearNotifications();
+            console.log("clearing notifications...");
           }}
         >
           <Text style={{ color: "white" }}>Borrar notificaciones</Text>
@@ -76,7 +55,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderTopWidth: 1,
     borderColor: "#292929",
-    paddingVertical: 10
+    paddingVertical: 10,
   },
 });
 
