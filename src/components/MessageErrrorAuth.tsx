@@ -10,7 +10,7 @@ const message = (error:any) =>{
     );
 }
 interface propsErrorMessage {
-    emptyInput?: string;
+    emptyInput?: string|null;
     error?: string|null;
 }
 
@@ -20,10 +20,7 @@ const MessageErrorAuth:React.FC<propsErrorMessage> = ({emptyInput,error}) => {
         return (
             <View style={styles.container}>
               
-                 {(emptyInput&&emptyInput.length>0)? message(emptyInput):" "}
-              
-             
-                  {error && message(error)}
+                 {(emptyInput&&emptyInput.length>0)? message(emptyInput):message("")}
               
             </View>  
         );
