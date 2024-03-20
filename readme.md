@@ -12,8 +12,14 @@ npm install
 ```
 
 ## Uso local
+Crear .env y poner las variables de entorno
 
 ```bash
 cd intecMCompanion
 npx expo run
+```
+
+## Construir apk
+```bash
+eas build -p android --profile preview --local
 ```
