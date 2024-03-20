@@ -3,7 +3,7 @@ import { Platform } from "react-native";
 export const sendPushToken = async (pushToken: string, sessionToken: string, userId: number) => {
   try {
     console.log("Sending push token:", pushToken);
-    console.log("to", typeof userId);
+    console.log("to", userId);
     console.log("Platform:", Platform.OS);
 
     const response = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/users/storeExpoToken`, {
@@ -14,7 +14,7 @@ export const sendPushToken = async (pushToken: string, sessionToken: string, use
       },
       body: JSON.stringify({
         owner_type: Platform.OS,
-        owner_id: 1,
+        owner_id: userId,
         value: pushToken,
       }),
     });
@@ -24,7 +24,7 @@ export const sendPushToken = async (pushToken: string, sessionToken: string, use
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    console.log(JSON.stringify(response));
+    console.log(JSON.stringify(response, null, 2));
     console.log("Push token sent successfully");
   } catch (error) {
     console.error("Error sending push token:", error);

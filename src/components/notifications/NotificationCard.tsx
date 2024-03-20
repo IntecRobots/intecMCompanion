@@ -5,31 +5,18 @@ import NotificationButtons from "./NotificationButtons";
 interface NotificationProps {
   title: string;
   body: string;
-  isRead: boolean;
-  showButtons: boolean;
 }
 
 const NotificationCard: React.FC<NotificationProps> = ({
   title,
   body,
-  // isRead,
-  showButtons,
 }) => {
   return (
     <View style={[styles.container]}>
-      {/* !isRead && <View style={styles.unreadIndicator}></View> */}
-      <Image
-        source={require("../../../assets/images/placeholder.jpg")}
-        style={styles.image}
-      />
+      <Image source={require("../../../assets/images/placeholder.jpg")} style={styles.image} />
       <View style={styles.textContainer}>
         <Text style={styles.notificationTitle}>{title}</Text>
         <Text style={styles.notificationBody}>{body}</Text>
-        {showButtons && (
-          <View style={styles.buttons}>
-            <NotificationButtons />
-          </View>
-        )}
       </View>
     </View>
   );
@@ -81,7 +68,7 @@ const styles = StyleSheet.create({
   },
   notificationBody: {
     fontFamily: "Poppins",
-    color: "#bdbdbd"
+    color: "#bdbdbd",
   },
 });
 

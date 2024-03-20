@@ -4,24 +4,18 @@ import NoDataError from "../NoDataError";
 import { Notification } from "@/src/types/types";
 
 interface NotificationContainerProps {
-  notifications: Notification[];
+  // notifications: Notification[];
+  notifications: any;
 }
 
 const NotificationContainer: React.FC<NotificationContainerProps> = ({ notifications }) => {
+  
   return (
     <ScrollView style={styles.notificationsContainer}>
       {notifications.length ? (
         notifications
           .reverse()
-          .map((notification: any, k: number) => (
-            <NotificationCard
-              key={k}
-              body={notification?.request?.content?.body}
-              title={notification?.request?.content?.title}
-              isRead={notification.isRead}
-              showButtons={notification?.request?.content?.data?.showButtons}
-            />
-          ))
+          .map((notification: any, k: number) => <NotificationCard key={k} body={notification?.data?.body} title={notification?.data?.title} />)
       ) : (
         <NoDataError message="No tienes notificaciones" />
       )}
