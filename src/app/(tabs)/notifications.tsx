@@ -5,18 +5,20 @@ import NotificationTabs from "@/src/components/notifications/NotificationTabs";
 import ScreenLoadingSpinner from "@/src/components/ScreenLoadingSpinner";
 import NotificationContainer from "@/src/components/notifications/NotificationContainer";
 import useGetNotifications from "@/src/hooks/useGetNotifications";
+import { useDeleteNotifications } from "@/src/hooks/useDeleteNotifications";
 
 const Notifications: React.FC = () => {
   // const [activeTab, setActiveTab] = useState<string>("unread");
   const { notifications, isLoading, error, refetch } = useGetNotifications();
+  const { isDeleting, deleteNotifications } = useDeleteNotifications();
 
   useFocusEffect(
     useCallback(() => {
       refetch();
-    }, [])
+    }, [isDeleting])
   );
 
-  if (isLoading) {
+  if (isLoading || isDeleting) {
     return <ScreenLoadingSpinner size={110} message="Cargando tus notificaciones..." />;
   }
 
@@ -30,13 +32,13 @@ const Notifications: React.FC = () => {
 
   return (
     <View style={styles.container}>
-     {/* <NotificationTabs activeTab={activeTab} setActiveTab={setActiveTab} /> */}
+      {/* <NotificationTabs activeTab={activeTab} setActiveTab={setActiveTab} /> */}
 
       {notifications.length > 0 && (
         <View style={styles.clearButtonContainer}>
           <Pressable
             onPress={() => {
-              console.log("clearing notifications...");
+              deleteNotifications();
             }}
             style={styles.clearButton}
           >
@@ -62,7 +64,7 @@ const styles = StyleSheet.create({
   clearButtonText: {
     color: "white",
     fontFamily: "PoppinsSemiBold",
-    padding: 10
+    padding: 10,
   },
   clearButtonContainer: {
     position: "absolute",
