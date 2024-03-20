@@ -11,5 +11,30 @@ export type Notification = {
   body: string;
   isRead: boolean;
   hasButtons: boolean;
+};
 
-}
+export type GoogleEvent = {
+  anfitrion: number;
+  description: string | null;
+  id: string;
+  location: string;
+  summary: string;
+  start: DateTime;
+  end: DateTime;
+  attendees: Attendee[];
+};
+
+type DateTime = {
+  date: string | null;
+  dateTime: string;
+  timeZone: string;
+};
+
+type Attendee = {
+  displayName: string;
+  email: string;
+};
+
+export type GoogleEventsResponse = {
+  googleEvent: GoogleEvent[];
+};

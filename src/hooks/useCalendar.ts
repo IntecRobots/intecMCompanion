@@ -1,10 +1,13 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useEffect, useState } from "react";
+import { postEvents } from "../utils/buildAndSendEvents";
+import { useSession } from "../context/ctx";
 
 const useCalendar = () => {
   const [events, setEvents] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<any>(null);
+  const { session } = useSession();
 
   const refetch = useCallback(async () => {
     setLoading(true);
@@ -22,8 +25,9 @@ const useCalendar = () => {
         },
       });
       const data = await response.json();
-      // console.log("Datos recibidos de la API");
+
       setEvents(data.items);
+      postEvents(data.items, session as string);
     } catch (err: any) {
       console.error("Error en refetch", err);
       setError(err.message);
