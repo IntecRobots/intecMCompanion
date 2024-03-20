@@ -7,8 +7,8 @@ import NotificationContainer from "@/src/components/notifications/NotificationCo
 import useGetNotifications from "@/src/hooks/useGetNotifications";
 
 const Notifications: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<string>("unread");
-  const { notifications, isLoading, error, refetch } = useGetNotifications();  
+  // const [activeTab, setActiveTab] = useState<string>("unread");
+  const { notifications, isLoading, error, refetch } = useGetNotifications();
 
   useFocusEffect(
     useCallback(() => {
@@ -30,22 +30,46 @@ const Notifications: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <NotificationTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+     {/* <NotificationTabs activeTab={activeTab} setActiveTab={setActiveTab} /> */}
+
       {notifications.length > 0 && (
-        <Pressable
-          onPress={() => {
-            console.log("clearing notifications...");
-          }}
-        >
-          <Text style={{ color: "white" }}>Borrar notificaciones</Text>
-        </Pressable>
+        <View style={styles.clearButtonContainer}>
+          <Pressable
+            onPress={() => {
+              console.log("clearing notifications...");
+            }}
+            style={styles.clearButton}
+          >
+            <Text style={styles.clearButtonText}>Borrar notificaciones</Text>
+          </Pressable>
+        </View>
       )}
+
       <NotificationContainer notifications={notifications} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  clearButton: {
+    position: "absolute",
+    right: 20,
+    bottom: 20,
+    backgroundColor: "#3673F5",
+    opacity: 0.6,
+    borderRadius: 20,
+  },
+  clearButtonText: {
+    color: "white",
+    fontFamily: "PoppinsSemiBold",
+    padding: 10
+  },
+  clearButtonContainer: {
+    position: "absolute",
+    right: 9,
+    bottom: 9,
+    zIndex: 1,
+  },
   container: {
     flex: 1,
   },

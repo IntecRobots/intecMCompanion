@@ -12,7 +12,6 @@ const NotificationContainer: React.FC<NotificationContainerProps> = ({ notificat
   
   return (
     <ScrollView style={styles.notificationsContainer}>
-      <Text style={{ color: "white" }}>{JSON.stringify(notifications)}</Text>
       {notifications.length ? (
         notifications
           .reverse()
