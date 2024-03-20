@@ -1,7 +1,7 @@
 import { useSession } from "@/src/context/ctx";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { View, Text,StyleSheet,TextInput,TouchableOpacity,ActivityIndicator } from "react-native";
-import MessageErrorAuth from "../MessageErrrorAuth";
+import MessageErrorAuth from "../AuthMessageError";
 
 
 const BodyForm= () =>{
@@ -10,37 +10,6 @@ const BodyForm= () =>{
     const [password, setPassword] = useState<string>("");
     const { signIn, loading,error } = useSession();
     const [emptyInput,setEmptyInput] =useState<string|null>(error);
-    const [currentError,setCurrentError]=useState<string|null>(error);
-    const [errorMessageTimeout,setErrorMessageTimeout]= useState<any>()
-    const [emptyMessageTimeout,setEmptyMessageTimeout]= useState<any>()
-
-    useEffect(()=>{
-      if(error&& error.length>0)setEmptyInput(() => error);
-    },[error])
-   
-
-    useEffect(() => {
-      
-      if (emptyInput&&emptyInput.length>0) {
-        const timeout = setTimeout(() => {
-          setEmptyInput(() => "");
-        }, 5000);
-  
-        
-        setEmptyMessageTimeout(timeout);
-      }
-  
-      
-      return () => {
-      
-
-        if(emptyMessageTimeout){
-          clearTimeout(emptyMessageTimeout);
-        }
-      };
-    }, [emptyInput]);
-
-
 
     const logIn = () =>{
       if(username.length===0) {
@@ -92,6 +61,7 @@ const BodyForm= () =>{
 
               <MessageErrorAuth
                 emptyInput={emptyInput}
+                error={error}
               />
                         
         <Text style={styles.signupText}>

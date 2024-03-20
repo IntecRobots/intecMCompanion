@@ -10,8 +10,8 @@ import {
   Image,
   ActivityIndicator,
 } from "react-native";
-import HeadLoginForm from "./HeadLoginForm";
-import BodyForm from "./BodyForm";
+import BodyForm from "./FormBody";
+import HeadLoginForm from "./LoginFormHeader";
 
 const LoginForm = () => {
 
