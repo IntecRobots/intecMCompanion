@@ -56,6 +56,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
             if (response.status === 200) {
               await sendPushToken(pushToken as string, json.token, json.user_id);
               setSession(json.token);
+              await AsyncStorage.setItem("userId", json.user_id.toString());
               setLoading(false);
               router.replace("/(tabs)");
             } else {
