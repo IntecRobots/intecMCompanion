@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState, useEffect, useCallback } from "react";
 import { useSession } from "../context/ctx";
 
@@ -8,10 +9,11 @@ const useGetNotifications = () => {
   const { session } = useSession();
 
   const refetch = useCallback(async () => {
+    const userId = await AsyncStorage.getItem("userId");
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/getnotificaciones/${1}`, {
+      const response = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/getnotificaciones/${userId}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${session}`,

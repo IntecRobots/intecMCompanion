@@ -8,7 +8,7 @@ import useGetNotifications from "@/src/hooks/useGetNotifications";
 
 const Notifications: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("unread");
-  const { notifications, isLoading, error, refetch } = useGetNotifications();
+  const { notifications, isLoading, error, refetch } = useGetNotifications();  
 
   useFocusEffect(
     useCallback(() => {
@@ -17,7 +17,7 @@ const Notifications: React.FC = () => {
   );
 
   if (isLoading) {
-    return <ScreenLoadingSpinner size={110} message="Cargando todas tus notificaciones..." />;
+    return <ScreenLoadingSpinner size={110} message="Cargando tus notificaciones..." />;
   }
 
   if (error) {
