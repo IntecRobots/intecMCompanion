@@ -79,7 +79,10 @@ function RootLayoutNav() {
 
   return (
     <SessionProvider>
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+      <ThemeProvider
+        // value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+        value={DarkTheme}
+      >
         <Stack initialRouteName="index">
           <Stack.Screen name="index" options={{ headerShown: false }} />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />

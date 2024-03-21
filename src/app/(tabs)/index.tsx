@@ -1,15 +1,13 @@
-import React, { useEffect } from "react";
-import { View, Text, StyleSheet, ScrollView, ActivityIndicator } from "react-native";
+import React from "react";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import ButtonCard from "@/src/components/ButtonCard";
 import CalendarEvents from "@/src/components/CalendarEvents";
-import useCalendar from "@/src/hooks/useCalendar";
-import { useIsFocused } from "@react-navigation/native";
 import { router } from "expo-router";
 
 const DashboardScreen: React.FC = () => {
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.titleText}>Bienvenido, User</Text>
+      <Text style={styles.titleText}>Bienvenido a Intec Companion</Text>
       <View style={styles.buttonContainer}>
         <ButtonCard
           title="Gestionar salas"
