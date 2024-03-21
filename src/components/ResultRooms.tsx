@@ -1,17 +1,19 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import Room from "./Room";
+import RoomItem from "./Room";
 import NoDataError from "./NoDataError";
+import { Room } from "../types/types";
 
 interface PropsResult {
-  rooms: any;
+  rooms: Room[];
 }
 
 const ResultRooms: React.FC<PropsResult> = ({ rooms }) => {
+
   return (
     <View style={styles.centered}>
       {rooms.length ? rooms?.map((room: any, index: number) => (
-        <Room key={index} sala={room.sala} estado={room.estado} id={room.id} puntomapa={room.puntomapa} />
+        <RoomItem key={index} sala={room.sala} estado={room.estado} id={room.id} puntomapa={room.puntomapa} />
       )) : <NoDataError message="No se han encontrado salas con ese nombre" />} 
     </View>
   );

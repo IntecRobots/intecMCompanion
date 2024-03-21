@@ -9,7 +9,7 @@ type RoomProps = {
   estado: boolean;
 };
 
-const Room: React.FC<RoomProps> = ({ id, sala, puntomapa, estado }) => {
+const RoomItem: React.FC<RoomProps> = ({ id, sala, puntomapa, estado }) => {
   const [isEnabled, setIsEnabled] = useState<boolean>(estado);
   const { isUpdating, updateRoomState } = useRoomUpdate();
 
@@ -76,4 +76,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Room;
+export default RoomItem;

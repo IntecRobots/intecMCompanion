@@ -38,3 +38,10 @@ type Attendee = {
 export type GoogleEventsResponse = {
   googleEvent: GoogleEvent[];
 };
+
+export type Room = {
+    id?:string;
+    sala:string;
+    puntomapa?:string;
+    estado:boolean;
+}
