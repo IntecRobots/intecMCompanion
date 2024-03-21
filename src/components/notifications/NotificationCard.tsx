@@ -7,10 +7,7 @@ interface NotificationProps {
   body: string;
 }
 
-const NotificationCard: React.FC<NotificationProps> = ({
-  title,
-  body,
-}) => {
+const NotificationCard: React.FC<NotificationProps> = ({ title, body }) => {
   return (
     <View style={[styles.container]}>
       <Image source={require("../../../assets/images/placeholder.jpg")} style={styles.image} />
@@ -64,6 +61,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   notificationTitle: {
+    color: "white",
     fontFamily: "PoppinsSemiBold",
   },
   notificationBody: {

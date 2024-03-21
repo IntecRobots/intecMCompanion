@@ -5,20 +5,14 @@ import StyleOptionSetting from "@/src/components/StyleOptionSetting";
 import SettingsHead from "@/src/components/settings/SettingsHead";
 import { useState } from "react";
 
-
-
-
-
 const Settings = () => {
   const { signOut } = useSession();
   const [darkMode, setDarkMode] = useState<boolean>(false);
 
-
   //Controlar variable de darMode de forma global
   return (
     <View style={styles.container}>
-      
-      <SettingsHead 
+      {/* <SettingsHead 
         mode={darkMode}
       />
 
@@ -33,10 +27,16 @@ const Settings = () => {
           onValueChange={() => setDarkMode(!darkMode)}
           value={darkMode}
         />
-      </View>
+  </View> */}
       <GoogleButton />
 
-      <StyleOptionSetting text="Cerrar sesión" onPress={() => signOut()} isDarkMode={darkMode} stylesBoton={styles.button} stylesText={styles.buttonText}/>
+      <StyleOptionSetting
+        text="Cerrar sesión"
+        onPress={() => signOut()}
+        isDarkMode={darkMode}
+        stylesBoton={styles.button}
+        stylesText={styles.buttonText}
+      />
 
       <Text style={styles.footerText}>© 2024 Intec Robots.</Text>
     </View>
