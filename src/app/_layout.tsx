@@ -13,6 +13,8 @@ import { refreshAccessToken } from "../utils/refreshAccesToken";
 import useNotifications from "../hooks/useNotifications";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
+import { RootSiblingParent } from "react-native-root-siblings";
+
 export { ErrorBoundary } from "expo-router";
 
 export const unstable_settings = {
@@ -71,7 +73,11 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return (
+    <RootSiblingParent>
+      <RootLayoutNav />
+    </RootSiblingParent>
+  );
 }
 
 function RootLayoutNav() {

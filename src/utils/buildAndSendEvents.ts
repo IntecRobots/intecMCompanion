@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { GoogleEvent, GoogleEventsResponse } from "../types/types";
+import Toast from "react-native-root-toast";
 
 export const transformEvents = (events: any[], userId: string): GoogleEventsResponse => {
   const googleEvents: GoogleEvent[] = events.map((event) => {
@@ -30,8 +31,7 @@ export const transformEvents = (events: any[], userId: string): GoogleEventsResp
 };
 
 export const postEvents = async (events: any[], sessionToken: string) => {
-
-  if (!events) return
+  if (!events) return;
 
   const userId = await AsyncStorage.getItem("userId");
   const transformedEvents = transformEvents(events, userId as string);
@@ -47,12 +47,23 @@ export const postEvents = async (events: any[], sessionToken: string) => {
     });
 
     if (!response.ok) {
+      let toast = Toast.show(response.status.toString(), {
+        duration: Toast.durations.LONG,
+      });
       throw new Error(`Error en la petición POST: ${JSON.stringify(response)}`);
     }
 
     const result = await response.json();
     console.log("Eventos enviados con éxito:", result);
-  } catch (error) {
+    let toast = Toast.show(result.message, {
+      duration: Toast.durations.LONG,
+      position: Toast.positions.BOTTOM,
+    });
+  } catch (error: any) {
     console.error("Error al enviar eventos:", error);
+    let toast = Toast.show(error.message, {
+      duration: Toast.durations.LONG,
+      position: Toast.positions.BOTTOM,
+    });
   }
 };
