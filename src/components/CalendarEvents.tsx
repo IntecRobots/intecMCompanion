@@ -48,11 +48,11 @@ const CalendarEvents = () => {
           ))
         ) : (
           <View style={styles.centered}>
-            <Text style={styles.error}>{error ? error : "Inicia sesión con Google para ver tus eventos de Calendar."}</Text>
+            <Text style={styles.error}>{error ? error : "Inicia sesión o añade eventos a tu Calendar para mostrarlos aquí."}</Text>
             <Image source={require("../../assets/images/errorRobot.png")} style={styles.errorImage} />
           </View>
         )}
-        {events && <Text style={{ color: "white" }}>{JSON.stringify(transformEvents(events, "1"), null, 2)}</Text>}
+        {/* events && <Text style={{ color: "white" }}>{JSON.stringify(transformEvents(events, "1"), null, 2)}</Text> */}
       </View>
     </>
   );
