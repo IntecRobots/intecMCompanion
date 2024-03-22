@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View,Text,Image,StyleSheet} from "react-native";
 
-const HeadLoginForm = () =>{
+const LoginFormHeader = () =>{
     return(
         <View style={styles.curveShape}>
             <Image
@@ -32,4 +32,4 @@ const styles = StyleSheet.create({
       },
 });
 
-export default HeadLoginForm;
+export default LoginFormHeader;

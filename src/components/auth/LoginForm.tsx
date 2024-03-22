@@ -11,13 +11,13 @@ import {
   ActivityIndicator,
 } from "react-native";
 import BodyForm from "./FormBody";
-import HeadLoginForm from "./LoginFormHeader";
+import LoginFormHeader from "./LoginFormHeader";
 
 const LoginForm = () => {
 
   return (
     <View testID="login-form" style={styles.container}>
-      <HeadLoginForm/>
+      <LoginFormHeader/>
       <BodyForm/>
       <Text style={styles.footerText}>© 2024 Intec Robots.</Text>
     </View>

@@ -11,22 +11,23 @@ const BodyForm= () =>{
     const { signIn, loading,error } = useSession();
     const [emptyInput,setEmptyInput] =useState<string|null>(error);
 
+
     const logIn = () =>{
-      if(username.length===0) {
-        setEmptyInput("USERNAME NO puede estar vacio");
-          return;
-      }
-        
-
-      if(password.length===0) {
-        setEmptyInput("NO puede estar vacio tu PASSWORD");
+      if(password.length===0 ||username.length===0) {
+        console.log("Entrar en empty")
+        setEmptyInput("NO puede estar vacio los campos");
         return;
-      }
-
-
-
+      } 
+      
+      setEmptyInput("")
       signIn(username, password);
     };
+
+    useEffect(() =>{
+      setEmptyInput(error)
+    },[error])
+      
+    
 
     return(
         <View style={styles.loginCard}>
@@ -61,7 +62,6 @@ const BodyForm= () =>{
 
               <MessageErrorAuth
                 emptyInput={emptyInput}
-                error={error}
               />
                         
         <Text style={styles.signupText}>
