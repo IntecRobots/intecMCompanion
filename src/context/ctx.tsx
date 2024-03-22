@@ -10,12 +10,14 @@ const AuthContext = React.createContext<{
   session?: string | null;
   isLoading: boolean;
   loading: boolean;
+  error:string|null;
 }>({
   signIn: async (username, password) => {},
   signOut: () => null,
   session: null,
   isLoading: false,
   loading: false,
+  error:null
 });
 
 export function useSession() {
@@ -32,6 +34,7 @@ export function useSession() {
 export function SessionProvider(props: React.PropsWithChildren) {
   const [[isLoading, session], setSession] = useStorageState("session");
   const [loading, setLoading] = useState<boolean>(false);
+  const [error,setError] = useState<string|null>(null);
 
   return (
     <AuthContext.Provider
@@ -56,6 +59,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
             if (response.status === 200) {
               await sendPushToken(pushToken as string, json.token, json.user_id);
               setSession(json.token);
+              setError(null)
               await AsyncStorage.setItem("userId", json.user_id.toString());
               setLoading(false);
               router.replace("/(tabs)");
@@ -65,6 +69,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
             }
           } catch (error) {
             setLoading(false);
+            setError(`El USERNAME o PASSWORD NO coinciden`);
             console.error(error);
           }
         },
@@ -75,6 +80,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
         session,
         isLoading,
         loading,
+        error
       }}
     >
       {props.children}
