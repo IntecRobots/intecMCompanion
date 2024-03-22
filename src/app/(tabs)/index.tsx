@@ -1,20 +1,24 @@
-import React, { useEffect } from "react";
-import { View, Text, StyleSheet, ScrollView, ActivityIndicator } from "react-native";
+import React from "react";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import ButtonCard from "@/src/components/ButtonCard";
 import CalendarEvents from "@/src/components/CalendarEvents";
-import useCalendar from "@/src/hooks/useCalendar";
-import { useIsFocused } from "@react-navigation/native";
+import { router } from "expo-router";
 
 const DashboardScreen: React.FC = () => {
-
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.titleText}>Bienvenido, User</Text>
+      <Text style={styles.titleText}>Bienvenido a IntecBot</Text>
       <View style={styles.buttonContainer}>
-        <ButtonCard title="Añadir evento" iconName="calendar" onPress={() => {}} />
-        <ButtonCard title="Control remoto" iconName="robot" onPress={() => {}} />
-        <ButtonCard title="Videollamada" iconName="video" onPress={() => {}} />
-        <ButtonCard title="Gestionar salas" iconName="table" onPress={() => {}} />
+        <ButtonCard
+          title="Gestionar salas"
+          iconName="table"
+          onPress={() => {
+            router.replace("/(tabs)/rooms");
+          }}
+        />
+        <ButtonCard disabled title="Añadir evento" iconName="calendar" onPress={() => {}} />
+        <ButtonCard disabled title="Control remoto" iconName="robot" onPress={() => {}} />
+        <ButtonCard disabled title="Videollamada" iconName="video" onPress={() => {}} />
       </View>
       <CalendarEvents />
     </ScrollView>
