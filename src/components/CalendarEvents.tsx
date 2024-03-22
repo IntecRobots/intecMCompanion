@@ -52,6 +52,7 @@ const CalendarEvents = () => {
             <Image source={require("../../assets/images/errorRobot.png")} style={styles.errorImage} />
           </View>
         )}
+        {events && <Text style={{ color: "white" }}>{JSON.stringify(transformEvents(events, "1"), null, 2)}</Text>}
       </View>
     </>
   );
