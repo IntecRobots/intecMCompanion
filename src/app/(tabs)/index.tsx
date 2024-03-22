@@ -7,7 +7,7 @@ import { router } from "expo-router";
 const DashboardScreen: React.FC = () => {
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.titleText}>Bienvenido a Intec Companion</Text>
+      <Text style={styles.titleText}>Bienvenido a IntecBot</Text>
       <View style={styles.buttonContainer}>
         <ButtonCard
           title="Gestionar salas"

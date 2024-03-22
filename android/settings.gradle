@@ -1,4 +1,4 @@
-rootProject.name = 'intecMCompanion'
+rootProject.name = 'IntecBot'
 
 dependencyResolutionManagement {
   versionCatalogs {
