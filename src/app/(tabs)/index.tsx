@@ -2,12 +2,16 @@ import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import ButtonCard from "@/src/components/ButtonCard";
 import CalendarEvents from "@/src/components/CalendarEvents";
-import { router } from "expo-router";
+import { Link, Redirect, router } from "expo-router";
+import useTheme from "@/src/hooks/useTheme";
 
 const DashboardScreen: React.FC = () => {
+  const {theme,color,backgroundCard} = useTheme();
+
+  
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.titleText}>Bienvenido a IntecBot</Text>
+      <Text style={[styles.titleText,color]}>Bienvenido a IntecBot</Text>
       <View style={styles.buttonContainer}>
         <ButtonCard
           title="Gestionar salas"
@@ -15,10 +19,24 @@ const DashboardScreen: React.FC = () => {
           onPress={() => {
             router.replace("/(tabs)/rooms");
           }}
+          textColor={color}
+          background={backgroundCard}
         />
-        <ButtonCard disabled title="Añadir evento" iconName="calendar" onPress={() => {}} />
-        <ButtonCard disabled title="Control remoto" iconName="robot" onPress={() => {}} />
-        <ButtonCard disabled title="Videollamada" iconName="video" onPress={() => {}} />
+        
+        <Link href="/prueba" asChild>
+          <ButtonCard title="Añadir evento" iconName="calendar" onPress={() => {}} 
+          textColor={color}
+          background={backgroundCard}
+          />
+        </Link>
+
+        <ButtonCard disabled title="Control remoto" iconName="robot" onPress={() => {}} 
+        textColor={color}
+        background={backgroundCard}/>
+
+        <ButtonCard disabled title="Videollamada" iconName="video" onPress={() => {}} 
+        textColor={color}
+        background={backgroundCard}/>
       </View>
       <CalendarEvents />
     </ScrollView>
@@ -30,7 +48,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   titleText: {
-    color: "white",
     fontSize: 25,
     marginLeft: 15,
     fontFamily: "PoppinsSemiBold",
@@ -41,7 +58,6 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "space-around",
     borderTopWidth: 1,
-    borderColor: "#292929",
     paddingVertical: 10,
   },
 });

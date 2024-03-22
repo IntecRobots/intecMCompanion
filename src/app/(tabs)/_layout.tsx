@@ -34,7 +34,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
+          title: "Homes",
           headerTitleStyle: { fontFamily: "PoppinsSemiBold" },
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
         }}

@@ -12,6 +12,8 @@ import * as Notifications from "expo-notifications";
 import { refreshAccessToken } from "../utils/refreshAccesToken";
 import useNotifications from "../hooks/useNotifications";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
+import { useThemeColor } from "../components/Themed";
+import useTheme from "../hooks/useTheme";
 
 export { ErrorBoundary } from "expo-router";
 
@@ -75,18 +77,18 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
-
+  const {theme} = useTheme();
   return (
     <SessionProvider>
       <ThemeProvider
-        // value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-        value={DarkTheme}
+         //value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+        value={theme}
       >
         <Stack initialRouteName="index">
           <Stack.Screen name="index" options={{ headerShown: false }} />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+          <Stack.Screen name="prueba" options={{presentation:"modal"}}/>
         </Stack>
       </ThemeProvider>
     </SessionProvider>

@@ -1,21 +1,29 @@
 import { FontAwesome5 } from "@expo/vector-icons";
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions,TextStyle, StyleProp, TouchableOpacityProps } from "react-native";
 
 interface ButtonCardProps {
   title: string;
   iconName: string;
   onPress: () => void;
   disabled?: boolean;
+  textColor:StyleProp<TextStyle>;
+  background:any;
 }
 
 const screenWidth = Dimensions.get("window").width;
 
-const ButtonCard: React.FC<ButtonCardProps> = ({ title, iconName, onPress, disabled }) => {
+const ButtonCard: React.FC<ButtonCardProps> = ({ title, iconName, onPress, disabled,textColor,background }) => {
+
+  const styleCard = [
+    styles.card,
+    (disabled) ? {backgroundColor:"#121212"}:background,
+  ];
+  
   return (
-    <TouchableOpacity style={[styles.card, { backgroundColor: `${disabled ? "#121212" : "#242424"}` }]} onPress={onPress}>
+    <TouchableOpacity style={styleCard} onPress={onPress}>
       <FontAwesome5 name={iconName} size={30} color={`${disabled ? "#ababab" : "#3673F5"}`} />
-      <Text style={styles.cardText}>{title}</Text>
+      <Text style={[styles.cardText,textColor]}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -31,7 +39,6 @@ const styles = StyleSheet.create({
     height: 120,
   },
   cardText: {
-    color: "white",
     marginTop: 10,
   },
 });
