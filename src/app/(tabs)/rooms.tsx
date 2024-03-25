@@ -9,7 +9,9 @@ import RoomSearchBar from "@/src/components/RoomSearchBar";
 
 const Rooms = () => {
   const isFocused = useIsFocused();
-  const { rooms, isLoading, error, refetch } = useRooms(`${process.env.EXPO_PUBLIC_API_URL}/salas`);
+  const { rooms, isLoading, error, refetch } = useRooms(
+    `${process.env.EXPO_PUBLIC_API_URL}/salas`
+  );
   const [currentRooms, setCurrentRooms] = useState<any>(rooms);
 
   useEffect(() => {
@@ -18,13 +20,11 @@ const Rooms = () => {
     }
   }, [isFocused, refetch]);
 
-
   if (isLoading) {
     return (
       <ScreenLoadingSpinner size={110} message="Cargando todas las salas..." />
     );
   }
-
 
   if (error) {
     return (
@@ -36,13 +36,8 @@ const Rooms = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <RoomSearchBar
-        rooms={rooms.records}
-        setRooms={setCurrentRooms}
-      />
-      <ResultRooms
-        rooms={currentRooms}
-      />
+      <RoomSearchBar rooms={rooms.records} setRooms={setCurrentRooms} />
+      <ResultRooms rooms={currentRooms} />
     </ScrollView>
   );
 };
@@ -58,7 +53,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderTopWidth: 1,
     borderColor: "#292929",
-    paddingVertical: 10
+    paddingVertical: 10,
   },
 });
 

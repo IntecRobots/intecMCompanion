@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Text, View, TouchableOpacity, StyleSheet, Switch, ActivityIndicator } from "react-native";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  Switch,
+  ActivityIndicator,
+} from "react-native";
 import { useRoomUpdate } from "../hooks/useRoomUpdate";
 
 type RoomProps = {
@@ -24,7 +31,10 @@ const Room: React.FC<RoomProps> = ({ id, sala, puntomapa, estado }) => {
   const roomStyle = isEnabled ? styles.roomAvailable : styles.roomOccupied;
 
   return (
-    <TouchableOpacity style={[styles.roomContainer, roomStyle]} onPress={toggleRoomState}>
+    <TouchableOpacity
+      style={[styles.roomContainer, roomStyle]}
+      onPress={toggleRoomState}
+    >
       <View>
         <Text style={styles.roomText}>{sala}</Text>
         <Text style={styles.mapText}>{puntomapa}</Text>
