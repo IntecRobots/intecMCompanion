@@ -13,13 +13,16 @@ const useGetNotifications = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/getnotificaciones/${userId}`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${session}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `${process.env.EXPO_PUBLIC_API_URL}/getnotificaciones/${userId}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${session}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`Network response was not ok: ${response.statusText}`);

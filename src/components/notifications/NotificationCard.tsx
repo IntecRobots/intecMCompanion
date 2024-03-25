@@ -1,25 +1,51 @@
-import { StyleSheet, View, Image } from "react-native";
+import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import { Text } from "../Themed";
-import NotificationButtons from "./NotificationButtons";
+import { useState } from "react";
 
 interface NotificationProps {
+  id: number;
+  key: number;
+  leida: number;
   title: string;
   body: string;
+  onMarkAsRead: (id: number) => void;
 }
 
-const NotificationCard: React.FC<NotificationProps> = ({ title, body }) => {
+const NotificationCard: React.FC<NotificationProps> = ({
+  id,
+  leida,
+  title,
+  body,
+  onMarkAsRead,
+}) => {
   return (
-    <View style={[styles.container]}>
-      <Image source={require("../../../assets/images/placeholder.jpg")} style={styles.image} />
+    <TouchableOpacity
+      style={[styles.container, leida === 0 ? styles.unreadContainer : {}]} // Cambio aquí para aplicar el estilo azul cuando no esté leída
+      onPress={() => onMarkAsRead(id)}
+    >
+      <Image
+        source={require("../../../assets/images/placeholder.jpg")}
+        style={styles.image} // Quitamos la opacidad modificada según el estado leída/no leída
+      />
       <View style={styles.textContainer}>
         <Text style={styles.notificationTitle}>{title}</Text>
         <Text style={styles.notificationBody}>{body}</Text>
       </View>
-    </View>
+      {leida === 0 && ( // Cambio para mostrar el indicador cuando NO esté leída
+        <View style={styles.unreadIndicator}></View>
+      )}
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
+  leidaContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  leidaTexto: {
+    marginLeft: 5,
+  },
   container: {
     flexDirection: "row",
     alignItems: "center",

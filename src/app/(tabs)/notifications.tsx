@@ -1,7 +1,6 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { View, StyleSheet, Pressable, Text } from "react-native";
 import { useFocusEffect } from "expo-router";
-import NotificationTabs from "@/src/components/notifications/NotificationTabs";
 import ScreenLoadingSpinner from "@/src/components/ScreenLoadingSpinner";
 import NotificationContainer from "@/src/components/notifications/NotificationContainer";
 import useGetNotifications from "@/src/hooks/useGetNotifications";
@@ -19,7 +18,12 @@ const Notifications: React.FC = () => {
   );
 
   if (isLoading || isDeleting) {
-    return <ScreenLoadingSpinner size={110} message="Cargando tus notificaciones..." />;
+    return (
+      <ScreenLoadingSpinner
+        size={110}
+        message="Cargando tus notificaciones..."
+      />
+    );
   }
 
   if (error) {
