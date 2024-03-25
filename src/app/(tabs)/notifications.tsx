@@ -6,11 +6,14 @@ import ScreenLoadingSpinner from "@/src/components/ScreenLoadingSpinner";
 import NotificationContainer from "@/src/components/notifications/NotificationContainer";
 import useGetNotifications from "@/src/hooks/useGetNotifications";
 import { useDeleteNotifications } from "@/src/hooks/useDeleteNotifications";
+import useTheme from "@/src/hooks/useTheme";
 
 const Notifications: React.FC = () => {
   // const [activeTab, setActiveTab] = useState<string>("unread");
   const { notifications, isLoading, error, refetch } = useGetNotifications();
   const { isDeleting, deleteNotifications } = useDeleteNotifications();
+  const {color} = useTheme();
+
 
   useFocusEffect(
     useCallback(() => {
@@ -42,12 +45,14 @@ const Notifications: React.FC = () => {
             }}
             style={styles.clearButton}
           >
-            <Text style={styles.clearButtonText}>Borrar notificaciones</Text>
+            <Text style={[styles.clearButtonText,color]}>Borrar notificaciones</Text>
           </Pressable>
         </View>
       )}
 
-      <NotificationContainer notifications={notifications} />
+      <NotificationContainer 
+      notifications={notifications}
+       />
     </View>
   );
 };

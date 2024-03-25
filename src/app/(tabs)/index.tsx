@@ -23,12 +23,12 @@ const DashboardScreen: React.FC = () => {
           background={backgroundCard}
         />
         
-        <Link href="/prueba" asChild>
+        
           <ButtonCard title="Añadir evento" iconName="calendar" onPress={() => {}} 
           textColor={color}
           background={backgroundCard}
           />
-        </Link>
+        
 
         <ButtonCard disabled title="Control remoto" iconName="robot" onPress={() => {}} 
         textColor={color}
@@ -38,7 +38,9 @@ const DashboardScreen: React.FC = () => {
         textColor={color}
         background={backgroundCard}/>
       </View>
-      <CalendarEvents />
+      <CalendarEvents 
+        color={color}
+      />
     </ScrollView>
   );
 };

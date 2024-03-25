@@ -1,9 +1,14 @@
+import { StyleProp, TextStyle } from "react-native";
+
 export type Visit = {
   title: string;
   description: string;
   startDate: string;
   startTime: string;
   room: string;
+  color:StyleProp<TextStyle>,
+  background:any,
+  border:any
 };
 
 export type Notification = {

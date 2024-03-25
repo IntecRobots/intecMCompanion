@@ -17,7 +17,7 @@ const ButtonCard: React.FC<ButtonCardProps> = ({ title, iconName, onPress, disab
 
   const styleCard = [
     styles.card,
-    (disabled) ? {backgroundColor:"#121212"}:background,
+    background,
   ];
   
   return (

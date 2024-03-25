@@ -6,11 +6,13 @@ import VisitTabs from "@/src/components/visits/VisitTabs";
 import { filterUpcomingVisits } from "@/src/utils/filterUpcomingVisits";
 import VisitContainer from "@/src/components/visits/VisitContainer";
 import ScreenLoadingSpinner from "@/src/components/ScreenLoadingSpinner";
+import useTheme from "@/src/hooks/useTheme";
 
 const Visitas: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("upcoming");
   const { visits, isLoading, error, refetch } = useVisits(`${process.env.EXPO_PUBLIC_API_URL}/visitas`);
   const isFocused = useIsFocused();
+  const {color} = useTheme();
 
   const displayedVisits = activeTab === "upcoming" ? filterUpcomingVisits(visits) : visits.records;
 
@@ -27,7 +29,7 @@ const Visitas: React.FC = () => {
   if (error) {
     return (
       <View style={styles.centered}>
-        <Text style={{ color: "white" }}>Error al cargar las visitas: {error}</Text>
+        <Text style={color}>Error al cargar las visitas: {error}</Text>
       </View>
     );
   }

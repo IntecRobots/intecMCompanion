@@ -6,11 +6,14 @@ import { useIsFocused } from "@react-navigation/native";
 import ScreenLoadingSpinner from "@/src/components/ScreenLoadingSpinner";
 import ResultRooms from "@/src/components/ResultRooms";
 import RoomSearchBar from "@/src/components/RoomSearchBar";
+import useTheme from "@/src/hooks/useTheme";
 
 const Rooms = () => {
   const isFocused = useIsFocused();
   const { rooms, isLoading, error, refetch } = useRooms(`${process.env.EXPO_PUBLIC_API_URL}/salas`);
   const [currentRooms, setCurrentRooms] = useState<any>(rooms);
+  const {color,borderColorNotifier} = useTheme();
+
 
   useEffect(() => {
     if (isFocused) {
@@ -28,8 +31,8 @@ const Rooms = () => {
 
   if (error) {
     return (
-      <View style={styles.centered}>
-        <Text>Error al cargar las salas</Text>
+      <View style={[borderColorNotifier,styles.centered]}>
+        <Text style={color}>Error al cargar las salas</Text>
       </View>
     );
   }
@@ -57,7 +60,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderTopWidth: 1,
-    borderColor: "#292929",
     paddingVertical: 10
   },
 });

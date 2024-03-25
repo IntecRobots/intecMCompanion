@@ -1,19 +1,19 @@
 import React from "react";
 import { Switch, Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import useTheme from "../hooks/useTheme";
 
 
 interface ThemeOptionProps {
     text: string;
     onPress: () => void;
-    isDarkMode: boolean;
     center?:boolean;
     flexDirectionRow?:boolean;
     stylesBoton?: any;
     stylesText?:  any;
   }
 
-  const StyleOptionSetting: React.FC<ThemeOptionProps> = ({ text, onPress, isDarkMode,center,flexDirectionRow, stylesBoton, stylesText }) => {
-
+  const StyleOptionSetting: React.FC<ThemeOptionProps> = ({ text, onPress,center,flexDirectionRow, stylesBoton, stylesText }) => {
+    const {color} =useTheme();
     if(stylesBoton&&!(typeof stylesBoton.create ===  'function')) stylesBoton == undefined;
     if(stylesText&&!(typeof stylesText.create ===  'function')) stylesText == undefined;
 
@@ -27,7 +27,7 @@ interface ThemeOptionProps {
         styles.optionText, 
         center && { textAlign: 'center' },
         stylesText,
-        (isDarkMode) ? styles.textLight :  styles.textDark
+        color,
     ];
 
     return (

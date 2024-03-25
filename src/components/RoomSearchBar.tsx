@@ -1,6 +1,7 @@
 import React, { useState,Dispatch,SetStateAction, useEffect} from "react";
 import { View,TextInput,StyleSheet } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
+import useTheme from "../hooks/useTheme";
 
 interface SearchRoomsProps {
     rooms:any;
@@ -11,6 +12,7 @@ interface SearchRoomsProps {
 const SearchRooms:React.FC<SearchRoomsProps> = ({rooms,setRooms}) =>{
 
   const [searchQuery, setSearchQuery] = useState("");
+  const {color,backgroundSearchRoom} =useTheme();
 
   useEffect(() => {
     filterRooms();
@@ -25,9 +27,9 @@ const SearchRooms:React.FC<SearchRoomsProps> = ({rooms,setRooms}) =>{
     
 
     return(
-        <View style={styles.searchSection}>
+        <View style={[backgroundSearchRoom,styles.searchSection]}>
             <FontAwesome5 name="search" size={20} color="#868A90" style={styles.searchIcon} />
-            <TextInput style={styles.input} onChangeText={text => setSearchQuery(text)}   placeholder="Buscar" placeholderTextColor="#868A90" />
+            <TextInput style={[color,styles.input]} onChangeText={text => setSearchQuery(text)}   placeholder="Buscar" placeholderTextColor="#868A90" />
         </View>
     );
 }
@@ -38,7 +40,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         fontSize: 16,
-        backgroundColor: "#141518",
         height: 40,
         borderRadius: 20,
         paddingHorizontal: 16,
@@ -55,7 +56,6 @@ const styles = StyleSheet.create({
         paddingRight: 10,
         paddingBottom: 10,
         paddingLeft: 0,
-        color: "white",
         fontSize: 16,
       },
 });

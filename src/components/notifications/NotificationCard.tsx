@@ -1,19 +1,24 @@
-import { StyleSheet, View, Image } from "react-native";
-import { Text } from "../Themed";
+import { StyleSheet, View, Image, StyleProp, TextStyle } from "react-native";
+import { Text, ViewProps } from "../Themed";
 import NotificationButtons from "./NotificationButtons";
 
 interface NotificationProps {
   title: string;
   body: string;
+  date:string;
+  color: StyleProp<TextStyle>;
+  colorParagraph: StyleProp<TextStyle>;
+  borderColor:any;
 }
 
-const NotificationCard: React.FC<NotificationProps> = ({ title, body }) => {
+const NotificationCard: React.FC<NotificationProps> = ({ title, body,date,color,colorParagraph,borderColor }) => {
   return (
-    <View style={[styles.container]}>
+    <View style={[styles.container,borderColor]}>
       <Image source={require("../../../assets/images/placeholder.jpg")} style={styles.image} />
-      <View style={styles.textContainer}>
-        <Text style={styles.notificationTitle}>{title}</Text>
-        <Text style={styles.notificationBody}>{body}</Text>
+      <View style={[styles.textContainer]}>
+        <Text style={[styles.notificationTitle,color]}>{title}</Text>
+        <Text style={[styles.notificationBody,colorParagraph]}>{body}</Text>
+        <Text style={[styles.notificationBody,colorParagraph]}>{date}</Text>
       </View>
     </View>
   );
@@ -25,7 +30,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 20,
     borderTopWidth: 1,
-    borderColor: "#292929",
   },
   image: {
     width: 50,
@@ -61,12 +65,10 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   notificationTitle: {
-    color: "white",
     fontFamily: "PoppinsSemiBold",
   },
   notificationBody: {
     fontFamily: "Poppins",
-    color: "#bdbdbd",
   },
 });
 
