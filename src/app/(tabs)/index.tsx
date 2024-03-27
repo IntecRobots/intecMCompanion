@@ -16,9 +16,24 @@ const DashboardScreen: React.FC = () => {
             router.replace("/(tabs)/rooms");
           }}
         />
-        <ButtonCard disabled title="Añadir evento" iconName="calendar" onPress={() => {}} />
-        <ButtonCard disabled title="Control remoto" iconName="robot" onPress={() => {}} />
-        <ButtonCard disabled title="Videollamada" iconName="video" onPress={() => {}} />
+        <ButtonCard
+          disabled
+          title="Añadir evento"
+          iconName="calendar"
+          onPress={() => {}}
+        />
+        <ButtonCard
+          disabled
+          title="Control remoto"
+          iconName="robot"
+          onPress={() => {}}
+        />
+        <ButtonCard
+          disabled
+          title="Videollamada"
+          iconName="video"
+          onPress={() => {}}
+        />
       </View>
       <CalendarEvents />
     </ScrollView>
