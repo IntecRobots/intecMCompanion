@@ -1,12 +1,18 @@
-import { Image, Text, View, StyleSheet, ActivityIndicator } from "react-native";
+import { Image, Text, View, StyleSheet, ActivityIndicator, StyleProp, TextStyle } from "react-native";
 import useCalendar from "../hooks/useCalendar";
 import { useIsFocused } from "@react-navigation/native";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { transformEvents } from "../utils/buildAndSendEvents";
 
-const CalendarEvents = () => {
+interface PropsCalendarEvents{
+  color:StyleProp<TextStyle>;
+}
+
+
+const CalendarEvents:React.FC<PropsCalendarEvents> = ({color}) => {
   const { events, loading, error, refetch } = useCalendar();
   const isFocused = useIsFocused();
+  
 
   useEffect(() => {
     if (isFocused) {
@@ -26,29 +32,29 @@ const CalendarEvents = () => {
     return (
       <View style={{ marginTop: 120 }}>
         <ActivityIndicator size={80} color="#3673F5" />
-        <Text style={styles.loadingText}>Cargando eventos de Calendar...</Text>
+        <Text style={[styles.loadingText,color]}>Cargando eventos de Calendar...</Text>
       </View>
     );
   }
   return (
     <>
-      <Text style={styles.titleText}>Últimos eventos</Text>
+      <Text style={[styles.titleText,color]}>Últimos eventos</Text>
       <View style={styles.summaryContainer}>
         {!error && events ? (
           events?.slice(-4)?.map((event: any, index: number) => (
             <View key={index} style={styles.summaryBoxWrapper}>
               <View style={styles.summaryBox}>
-                <Text style={styles.eventTitleText} numberOfLines={2} key={event.id}>
+                <Text style={[styles.eventTitleText,color]} numberOfLines={2} key={event.id}>
                   {event.summary}
                 </Text>
-                <Text style={styles.eventCreatorText}>Estado: {event.status}</Text>
-                <Text style={styles.eventDateText}>{formatDate(event.start.dateTime)}</Text>
+                <Text style={[styles.eventCreatorText,color]}>Estado: {event.status}</Text>
+                <Text style={[styles.eventDateText,color]}>{formatDate(event.start.dateTime)}</Text>
               </View>
             </View>
           ))
         ) : (
           <View style={styles.centered}>
-            <Text style={styles.error}>{error ? error : "Inicia sesión con Google para ver tus eventos de Calendar."}</Text>
+            <Text style={[styles.error,color]}>{error ? error : "Inicia sesión con Google para ver tus eventos de Calendar."}</Text>
             <Image source={require("../../assets/images/errorRobot.png")} style={styles.errorImage} />
           </View>
         )}
@@ -58,9 +64,22 @@ const CalendarEvents = () => {
 };
 
 const styles = StyleSheet.create({
-  loadingText: { color: "white", fontFamily: "Poppins", marginTop: 25, fontSize: 12, textAlign: "center" },
-  errorImage: { height: 200, width: 200 },
-  error: { marginBottom: 30, color: "white", marginTop: 10 },
+  loadingText: { 
+    color: "white",
+    fontFamily: "Poppins", 
+    marginTop: 25,
+    fontSize: 12,
+    textAlign: "center"
+  },
+  errorImage: {
+     height: 200,
+      width: 200 
+    },
+  error: {
+     marginBottom: 30,
+      color: "white",
+       marginTop: 10 
+      },
   centered: {
     flex: 1,
     justifyContent: "center",

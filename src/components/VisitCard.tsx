@@ -8,16 +8,19 @@ const VisitCard: React.FC<Visit> = ({
   room,
   startDate,
   startTime,
+  color,
+  background,
+  border
 }) => {
   return (
-    <View style={styles.cardContainer}>
+    <View style={[border,styles.cardContainer]}>
       <Image
         source={require("../../assets/images/placeholder.jpg")}
         style={styles.image}
       />
-      <View style={styles.textContainer}>
+      <View style={[styles.textContainer,background]}>
         <View>
-          <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
+          <Text style={[styles.title,color]} numberOfLines={1} ellipsizeMode="tail">
             {title}
           </Text>
           <Text
@@ -29,7 +32,7 @@ const VisitCard: React.FC<Visit> = ({
           </Text>
         </View>
         <View style={{marginTop: 10}}>
-          <Text style={styles.italicText}>
+          <Text style={[styles.italicText,color]}>
             {startDate} - {startTime}
           </Text>
           <Text style={styles.boldText}>{room}</Text>
@@ -61,7 +64,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontFamily: "PoppinsBold",
-    color: "white",
   },
   description: {
     color: "#CCCCCC",
@@ -77,7 +79,6 @@ const styles = StyleSheet.create({
   italicText: {
     fontFamily: "PoppinsItalic",
     fontSize: 13,
-    color: "white",
   },
 });
 

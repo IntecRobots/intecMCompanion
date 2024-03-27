@@ -6,6 +6,7 @@ import { Pressable } from "react-native";
 import Colors from "@/src/constants/Colors";
 import { useColorScheme } from "@/src/hooks/useColorScheme";
 import { useClientOnlyValue } from "@/src/hooks/useClientOnlyValue";
+import useTheme from "@/src/hooks/useTheme";
 
 function TabBarIcon(props: { name: React.ComponentProps<typeof FontAwesome>["name"]; color: string }) {
   return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
@@ -13,6 +14,7 @@ function TabBarIcon(props: { name: React.ComponentProps<typeof FontAwesome>["nam
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const {background} = useTheme();
   return (
     <Tabs
       screenOptions={{
@@ -20,9 +22,7 @@ export default function TabLayout() {
         tabBarActiveTintColor: "#3673F5",
         tabBarInactiveTintColor: "white",
         headerShown: useClientOnlyValue(false, true),
-        headerStyle: {
-          backgroundColor: "black",
-        },
+        headerStyle: background,
         tabBarStyle: {
           backgroundColor: "black",
           borderTopColor: "#292929",
@@ -34,7 +34,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
+          title: "Homes",
           headerTitleStyle: { fontFamily: "PoppinsSemiBold" },
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
         }}

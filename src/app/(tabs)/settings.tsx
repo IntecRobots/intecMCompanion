@@ -7,7 +7,7 @@ import { useState } from "react";
 
 const Settings = () => {
   const { signOut } = useSession();
-  const [darkMode, setDarkMode] = useState<boolean>(false);
+
 
   //Controlar variable de darMode de forma global
   return (
@@ -33,7 +33,6 @@ const Settings = () => {
       <StyleOptionSetting
         text="Cerrar sesión"
         onPress={() => signOut()}
-        isDarkMode={darkMode}
         stylesBoton={styles.button}
         stylesText={styles.buttonText}
       />
