@@ -1,33 +1,33 @@
 import { useSession } from "@/src/context/ctx";
 import { Switch, Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import GoogleButton from "@/src/components/GoogleButton";
-import StyleOptionSetting from "@/src/components/StyleOptionSetting";
+import StyleOptionSetting from "@/src/components/settings/StyleOptionSetting";
 import SettingsHead from "@/src/components/settings/SettingsHead";
 import { useState } from "react";
 
 const Settings = () => {
   const { signOut } = useSession();
   const [darkMode, setDarkMode] = useState<boolean>(false);
+  const [expertMode, setExpertMode] = useState<boolean>(false);
 
   //Controlar variable de darMode de forma global
   return (
     <View style={styles.container}>
-      {/* <SettingsHead 
-        mode={darkMode}
-      />
+      <SettingsHead mode={darkMode} />
 
       <View style={styles.option}>
         <Text style={styles.optionTextLight}>Modo experto</Text>
-        <Switch value={true} />
+        <Switch
+          onValueChange={() => setExpertMode(!expertMode)}
+          value={expertMode}
+        />
       </View>
-
+      {/*El dark mode aquí podré actualizarlo una vez se haga el merge con la actividad 
+      del modo oscuro que ha hecho joaquín, de momento puedo hacer poca cosa*/}
       <View style={styles.option}>
         <Text style={styles.optionTextLight}>Modo oscuro</Text>
-        <Switch 
-          onValueChange={() => setDarkMode(!darkMode)}
-          value={darkMode}
-        />
-  </View> */}
+        <Switch onValueChange={() => setDarkMode(!darkMode)} value={darkMode} />
+      </View>
       <GoogleButton />
 
       <StyleOptionSetting
