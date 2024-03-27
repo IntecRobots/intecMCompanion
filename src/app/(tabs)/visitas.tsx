@@ -6,20 +6,28 @@ import VisitTabs from "@/src/components/visits/VisitTabs";
 import { filterUpcomingVisits } from "@/src/utils/filterUpcomingVisits";
 import VisitContainer from "@/src/components/visits/VisitContainer";
 import ScreenLoadingSpinner from "@/src/components/ScreenLoadingSpinner";
+import SearchBar from "@/src/components/SearchBar";
 
 const Visitas: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("upcoming");
   const { visits, isLoading, error, refetch } = useVisits(`${process.env.EXPO_PUBLIC_API_URL}/visitas`);
+  const [currentVisits, setCurrentVisits] = useState<any>(visits);
   const isFocused = useIsFocused();
 
-  const displayedVisits = activeTab === "upcoming" ? filterUpcomingVisits(visits) : visits.records;
-
+  
   useEffect(() => {
     if (isFocused) {
       refetch();
     }
   }, [isFocused, refetch]);
 
+  
+
+
+  const displayedVisits = activeTab === "upcoming" ? filterUpcomingVisits(currentVisits)
+   : (typeof currentVisits ==='object')? currentVisits:visits.records;
+
+  
   if (isLoading) {
     return <ScreenLoadingSpinner message="Cargando tus visitas..." size={110} />;
   }
@@ -34,7 +42,15 @@ const Visitas: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <VisitTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+     <SearchBar
+          dataArray={visits.records}
+          setDataArray={setCurrentVisits}
+          searchFields={["nombre"]} 
+      />
+
+      {<VisitTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+}
+      
       <VisitContainer visits={displayedVisits} />
     </View>
   );
