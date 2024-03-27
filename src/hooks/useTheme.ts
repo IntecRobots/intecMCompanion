@@ -40,7 +40,7 @@ const style = StyleSheet.create({
         backgroundColor:'#F5EAE8'
     },
     backgroundColorCardRoomDark:{
-        backgroundColor:'#3673F5'
+        backgroundColor:'#292929'
     },
     backgroundColorCardRoomLight:{
         backgroundColor:'#F5EAE8'
