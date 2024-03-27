@@ -5,7 +5,7 @@ import useRooms from "@/src/hooks/useRooms";
 import { useIsFocused } from "@react-navigation/native";
 import ScreenLoadingSpinner from "@/src/components/ScreenLoadingSpinner";
 import ResultRooms from "@/src/components/ResultRooms";
-import RoomSearchBar from "@/src/components/RoomSearchBar";
+import SearchBar from "@/src/components/SearchBar";
 
 const Rooms = () => {
   const isFocused = useIsFocused();
@@ -36,10 +36,13 @@ const Rooms = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <RoomSearchBar
-        rooms={rooms.records}
-        setRooms={setCurrentRooms}
+      <SearchBar
+        dataArray={rooms.records}
+        setDataArray={setCurrentRooms}
+        searchFields={["sala"]} 
       />
+
+
       <ResultRooms
         rooms={currentRooms}
       />
